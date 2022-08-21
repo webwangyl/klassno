@@ -1,8 +1,8 @@
 <script setup lang="ts">
 // This starter template is using Vue 3 <script setup> SFCs
 import { ref, onMounted, getCurrentInstance } from "vue";
-import  * as echarts  from "echarts";
-import gsap from 'gsap'
+import * as echarts from "echarts";
+import gsap from "gsap";
 import Music from "./components/home/music.vue";
 
 let currentInstance: any = "";
@@ -70,20 +70,21 @@ onMounted(() => {
   const chartTitle = document.getElementById("chartTitle");
   if (chartTitle) {
     chart = echarts.init(chartTitle);
-    chart.setOption(option)
+    chart.setOption(option);
   }
-  const width = window.innerWidth
-  const height = window.innerHeight
-  console.log(width, height)
-  timeline = gsap.timeline({ ease: 'none' })
-  timeline.to('.mask', { backgroundColor: 'rgba(0,0,0,0)', duration: 1 })
-  timeline.to('.label-text', { right: '100px', bottom: '40px', opacity: 0.3, duration: 2 }, '<')
-   timeline.to('.label-text', { display: 'none', duration: 0 })
-  timeline.to('.mask', { display: 'none', duration: 0 })
-  timeline.to('.details', { opacity: 1, duration: 0.5 })
-   timeline.to('.btn', { opacity: 1, duration: 0.5 }, '<')
+  timeline = gsap.timeline({ ease: "none" });
+  timeline.to(".mask", { backgroundColor: "rgba(0,0,0,0)", duration: 1 });
+  timeline.to(
+    ".label-text",
+    { right: "100px", bottom: "40px", opacity: 0.3, duration: 2 },
+    "<"
+  );
+  timeline.to(".label-text", { display: "none", duration: 0 });
+  timeline.to(".mask", { display: "none", duration: 0 });
+  timeline.to(".details", { opacity: 1, duration: 0.5 });
+  timeline.to(".btn", { opacity: 1, duration: 0.5 }, "<");
   currentInstance = getCurrentInstance();
-  audio = currentInstance.ctx.$refs.audio;
+  audio = document.getElementById('audio') as HTMLAudioElement
   if (audio) {
     (audio as HTMLElement).addEventListener("canplaythrough", (e: Event) => {
       canPlay.value = true;
@@ -103,15 +104,16 @@ const changeStatus = (status: boolean): void => {
 </script>
 
 <template>
-  <div class="mask">
-  </div>
+  <div class="mask"></div>
   <p class="label-text">点击播放声音效果更佳呦！</p>
   <div id="chartTitle"></div>
   <div class="details">这名程序员正在加班加点写bug！</div>
-  <el-button class="btn" v-if="count < 100" @click="add" plain>催他！{{ count }}</el-button>
-  <el-button v-else plain disable>别TM催了！</el-button>
+  <el-button class="btn" v-if="count < 100" @click="add" plain
+    >催他！{{ count }}</el-button
+  >
+  <el-button v-else plain disable>别TM催了！SB</el-button>
   <Music class="root-music" :status="playStatus" @change="changeStatus"></Music>
-  <audio ref="audio" loop src="/media/minecraft.mp3">
+  <audio id="audio" loop src="/media/minecraft.mp3">
     Your browser does not support the
     <code>audio</code> element.
   </audio>
