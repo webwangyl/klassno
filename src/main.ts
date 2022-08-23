@@ -1,9 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import '@/style/index.scss'
-import { gsap } from "gsap";
-import { PixiPlugin } from "gsap/PixiPlugin.js";
-import { MotionPathPlugin } from "gsap/MotionPathPlugin.js";
+import router from './router'
+import { store, key } from './store/index.js'
 
-gsap.registerPlugin(PixiPlugin, MotionPathPlugin);
-createApp(App).mount('#app')
+createApp(App).use(router).use(store, key).mount('#app')
