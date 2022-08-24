@@ -53,6 +53,7 @@ onMounted(() => {
     cursor: pointer;
     margin: 10px;
     transition: color ease 0.25s;
+    font-size: 12px;
   }
   .i18n:hover, .i18n.select {
     color: $color-inside;

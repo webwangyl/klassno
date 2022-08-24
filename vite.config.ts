@@ -40,7 +40,7 @@ export default defineConfig({
        * '@import "@/assets/scss/globalVariable1.scss";
        * @import"@/assets/scss/globalVariable2.scss";'
       **/
-        additionalData: '@import "@/style/variable.scss";@import "@/style/mixin.scss";@import "@/style/format.scss";',
+        additionalData: '@import "@/style/variable.scss";@import "@/style/mixin.scss";',
       }
     }
   },

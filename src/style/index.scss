@@ -1,3 +1,4 @@
+@import './format.scss';
 
 html, body, #app {
     height: 100%;
@@ -5,4 +6,31 @@ html, body, #app {
 
 #app {
     background-color: #131517;
+}
+
+.noice-text {
+    // 全局提示文字样式
+    color: $noice-text;
+    font-size: 14px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    font-weight: 200;
+    white-space: nowrap;
+}
+
+.page-title {
+    // 页面中的标题
+    color: $primary-first-title;
+    font-size: 42px;
+    font-weight: 100;
+    letter-spacing: .2em;
+    margin-bottom: .5em;
+}
+
+.info-text {
+    color: $primary-text;
+    font-size: 14px;
+    font-weight: 200;
+    letter-spacing: 0.5px;
+    line-height: 1.8em;
 }

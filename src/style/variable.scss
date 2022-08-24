@@ -7,4 +7,5 @@ $color-theme: #000; // 主题色
 $color-inside: #fff; // 主题色相反色
 $primary-first-title: #fff; // 一级标题颜色
 $primary-second-title: mix($primary-first-title, $color-theme, 90%); // 二级标题颜色
-$primary-text: mix($primary-first-title, $color-theme, 70%); // 主要的文字颜色（用于段落、正文等）
+$primary-text: mix($primary-first-title, $color-theme, 80%); // 主要的文字颜色（用于段落、正文等）
+$noice-text: #ffe660; // 提示文字颜色
