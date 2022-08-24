@@ -4,6 +4,7 @@
 		<div class="content">
 			<div class="grow">
                 <span class="grow-background"></span>
+                <span class="triangle"></span>
             </div>
 			<div>
 				<p class="noice-text noice-position">
@@ -74,12 +75,30 @@ onMounted(() => {
 		padding-left: 60px;
 		position: relative;
 		.grow {
-			width: 20px;
-			height: 100px;
-			background-color: #fff;
 			position: absolute;
+            height: 120px;
 			right: 100px;
-			top: calc(50% - 50px);
+			top: calc(50% - 100px);
+            .grow-background {
+                background-color: $noice-text;
+                width: 1px;
+                height: 100%;
+                position: absolute;
+                transform-origin: bottom;
+                animation: grow-line 4s infinite;
+            }
+            .triangle {
+                display: block;
+                position: absolute;
+                bottom: -4px;
+                left: -4px;
+                width: 0;
+                height: 0;
+                border-left: 5px solid transparent;
+                border-right: 5px solid transparent;
+                border-top: 5px solid $noice-text;
+                animation: hidden-triangle 4s infinite;
+            }
 		}
 		.noice-position {
 			position: absolute;
@@ -109,5 +128,35 @@ onMounted(() => {
 	100% {
 		filter: blur(10px) sepia(40%);
 	}
+}
+@keyframes grow-line {
+    0% {
+        height: 0;
+        transform: translateY(0);
+    }
+    15% {
+        height: 100%;
+        transform: translateY(0);
+    }
+    85% {
+        height: 100%;
+        transform: translateY(0);
+    }
+    100% {
+        height: 0;
+        transform-origin: bottom;
+        transform: translateY(200px);
+    }
+}
+@keyframes hidden-triangle {
+    0% {
+        transform: scale(1);
+    }
+    70% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(0);
+    }
 }
 </style>
