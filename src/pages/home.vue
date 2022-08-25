@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home page">
     <div class="glass"></div>
     <div class="content">
       <div class="grow">
@@ -36,22 +36,32 @@
       </div>
     </div>
   </div>
+  <div class="page">
+    <div class="right-slide"></div>
+  </div>
 </template>
 
 <script lang="ts" setup>
 import gsap from "gsap";
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { onMounted } from "vue";
 
+gsap.registerPlugin(ScrollTrigger)
 const tl = gsap.timeline();
+
 onMounted(() => {
   tl.fromTo(
     "span.text",
     { opacity: 0.3 },
     { opacity: 1, rotation: 45, duration: 0.25, stagger: 0.2 }
   );
-  const glass = document.getElementsByClassName("glass")[0];
-  gsap.from(".glass", {
-    x: -glass.clientWidth - 30,
+  gsap.to(".glass", {
+    scrollTrigger: {
+        trigger: '.glass',
+        markers: true,
+        toggleActions: "restart none none none",
+    },
+    x: 0,
     duration: 1,
     delay: 0.5,
   });
@@ -59,18 +69,22 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
+.page {
+    height: calc(100vh - 120px);
+}
 .home {
-  height: 100%;
   width: 100%;
   padding: 16px;
   color: $color-inside;
   display: flex;
   align-items: center;
+  z-index: 0;
   .glass {
     flex: 4;
     height: 600px;
     background-color: mix($color-inside, $color-theme, 30%);
     filter: blur(10px) sepia(40%);
+    transform: translateX(calc(-100% - 30px));
     animation: sepia 5s infinite;
   }
   .content {

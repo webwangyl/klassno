@@ -5,6 +5,7 @@ html, body, #app {
 }
 
 #app {
+    min-width: 1280px;
     background-color: #131517;
 }
 
@@ -25,6 +26,7 @@ html, body, #app {
     font-weight: 100;
     letter-spacing: .2em;
     margin-bottom: .5em;
+    white-space: nowrap;
 }
 
 .info-text {
