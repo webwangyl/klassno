@@ -27,13 +27,35 @@
 		</div>
 	</div>
 	<div class="introduce page">
-        <div class="frosted-glass">
-            <p class="page-title">ABOUT PROFESSION</p>
-            <p class="info-text">
-                I graduated in July 2020. Before graduation, I had practiced in AsiaInfo for about half a year and started my Vue journey here.<br/>
-                The first company to officially work is in Kelan, but it is not suitable for me. It uses Vue and weex technologies and does most mobile projects.
-            </p>
-        </div>
+		<div class="glass-container">
+			<div class="frosted-glass glass-1">
+				<p class="page-title">PROFESSION</p>
+				<p class="info-text">
+					I graduated in July 2020. Before graduation, I had practiced in AsiaInfo for about half a year and started my Vue journey here.<br/>
+				</p>
+				<p class="info-text">
+					The first company to officially work is in Kelan, but it is not suitable for me. It uses Vue and weex technologies and does most mobile projects.
+					In terms of work arrangement, I will do more work on weex. I think that working on weex will affect my future development, so I came to another company, huaun, in May 2021.
+				</p>
+				<p class="info-text">
+					This is a start-up company in network security. My colleagues and leaders are very nice. Because there are not many start-up companies, I can independently take charge of the whole front-end project, from framework construction to specific business. This is a good training opportunity for me who has just graduated. The technology used here is nuxt, and all projects are on the PC side. Most of them are on the background management, and there are also some SaaS side projects, The company's architecture is developing in the direction of cloud nativity. For this reason, I also learned docker and Qiankun technologies.Although it can't satisfy my persistent pursuit of cool web, I still like it here.
+				</p>
+				<easy-button class="button-p" @touch="next"></easy-button>
+			</div>
+			<div class="frosted-glass glass-2">
+				<p class="page-title">HOBBY</p>
+				<p class="info-text">
+					Like the music you hear, my favorite game is minecraft.I like its freedom, creativity, expansibility and powerful Redstone Technology(although I am a novice in Redstone).I like to listen to comfortable music, make a cup of tea and enjoy the process of creating something I want in a leisurely afternoon.
+				</p>
+				<p class="info-text">
+					My favorite cartoon is one piece. I have seen it since junior high school and have seen it at least four times. I've been crying for countless times. If my friends have not seen it, they will usually be recommended by me to see it many times. Ha ha.
+				</p>
+				<p class="info-text">
+					On the web, there is no doubt that I like cool, animation, etc. a cool page will stimulate my desire to explore and make me want to complete it myself (most of them will fail haha)
+				</p>
+				<easy-button class="button-bp" type="left" @touch="back"></easy-button>
+			</div>
+		</div>
 	</div>
 	<div class="page home"></div>
 	<div class="page last"></div>
@@ -45,6 +67,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { onMounted, reactive } from "vue";
 import { useStore } from "../store";
 import { ElProgress } from "element-plus";
+import EasyButton from '@/components/base/easyButton.vue'
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -84,7 +107,35 @@ const init = () => {
 		x: 0,
 		duration: 0.5,
 	});
+	gsap.from('.glass-container', {
+		scrollTrigger: {
+			trigger: '.glass-container',
+			scroller: '.main',
+			scrub: 1,
+			start: 'top bottom',
+			end: 'bottom 60%',
+			toggleActions: 'restart pause resume pause',
+		},
+		x: 200,
+		scale: 0.1,
+		rotation: 360,
+		duration: 1,
+	})
 };
+
+const next = () => {
+	gsap.to('.frosted-glass', {
+		x: '-=' + (document.querySelector('.frosted-glass') as HTMLElement).offsetWidth,
+		duration: .5,
+	})
+}
+
+const back = () => {
+	gsap.to('.frosted-glass', {
+		x: '+=' + (document.querySelector('.frosted-glass') as HTMLElement).offsetWidth,
+		duration: .5,
+	})
+}
 
 onMounted(() => {
 	init();
@@ -169,19 +220,37 @@ onMounted(() => {
 
 .introduce {
 	position: relative;
+	.glass-container {
+		position: absolute;
+		width: 60%;
+        height: 500px;
+		overflow: hidden;
+		top: 50%;
+        left: 50%;
+		display: flex;
+        transform: translate(-50%, -50%);
+		box-shadow: 8px 8px 4px 0 rgba($color-inside, .2);
+	}
     .frosted-glass {
-        position: absolute;
-        width: 60%;
-        height: 60%;
+		width: 100%;
+        height: 500px;
         display: flex;
+		flex-shrink: 0;
         flex-direction: column;
+		position: relative;
         padding: 12px;
         align-items: center;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
         background: radial-gradient(closest-side, rgba($color-theme, .2), rgba($color-inside, .2));
-        box-shadow: 8px 8px 4px 0 rgba($color-inside, .2);
+		.button-p {
+			position: absolute;
+			bottom: 20px;
+			right: 20px;
+		}
+		.button-bp {
+			position: absolute;
+			bottom: 20px;
+			left: 20px;
+		}
     }
     .frosted-glass::before {
         content: '';

@@ -3,7 +3,7 @@
 		<div class="header">
 			<div
 				class="logo"
-				@mouseenter="HandleMouseEnter"
+				@mouseenter="HandleMouseEnter($event, 10, 10)"
 				@mouseleave="HandleMouseLeave"
 			>
 				logo
@@ -11,7 +11,7 @@
 			<div
 				class="tab"
 				@click="expandTab"
-				@mouseenter="HandleMouseEnter"
+				@mouseenter="HandleMouseEnter($event, 20, 10)"
 				@mouseleave="HandleMouseLeave"
 			>
 				导航
@@ -125,8 +125,8 @@ onMounted(() => {
 		yIndex,
 	});
 });
-const HandleMouseEnter = (e: MouseEvent) => {
-    gridTransform.HandleMouseEnter(e)
+const HandleMouseEnter = (e: MouseEvent, Xoffset:number, Yoffset:number) => {
+    gridTransform.HandleMouseEnter(e, Xoffset, Yoffset)
 }
 const HandleMouseLeave = () => gridTransform.HandleMouseLeave()
 </script>
@@ -204,6 +204,7 @@ const HandleMouseLeave = () => gridTransform.HandleMouseLeave()
 		position: absolute;
 		opacity: 0.2;
 		transition: transform 0.6s cubic-bezier(0.75, 0, 0.25, 1);
+		transition-delay: 0;
 		background-color: $color-inside;
 	}
 	.vertical {

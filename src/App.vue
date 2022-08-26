@@ -17,7 +17,7 @@ import Music from "./components/base/music.vue";
 const store = useStore()
 let audio: HTMLAudioElement;
 
-const language = 'CH'
+const language = 'EN'
 
 const status = computed(() => {
   return store.state.audioStatus

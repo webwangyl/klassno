@@ -5,10 +5,12 @@ export interface Transtate {
     horizontal:HTMLCollection, // 网格横线
     horizontalY: number[], // 最近的两条横线原始位置
     xIndex: number[], // 最近的两条横线索引
+    Xoffset?: number, // x方向偏移量
+    Yoffset?: number, // y方向偏移量
 }
 
 export interface GridTransform {
-    HandleMouseEnter: (e: MouseEvent) => void,
+    HandleMouseEnter: (e: MouseEvent, Xoffset?: number, Yoffset?: number) => void,
     HandleMouseLeave: () => void,
 }
 
@@ -18,7 +20,7 @@ export default function useGridTransform(transtate: Transtate): GridTransform  {
     let { vertical, verticalX, yIndex, horizontal, horizontalY, xIndex } = transtate
     const tl = gsap.timeline()
     return {
-        HandleMouseEnter: (e: MouseEvent) => {
+        HandleMouseEnter: (e: MouseEvent, Xoffset = 0, Yoffset = 0) => {
             const { width, height, x, y } = (e.target as HTMLElement).getBoundingClientRect()
             yIndex = []
             xIndex = []
@@ -40,11 +42,11 @@ export default function useGridTransform(transtate: Transtate): GridTransform  {
                     }
                 })
             } catch (error) {}
-            const offsetx = x + width + 20
-            const offsety = y + height + 10
-            tl.to(vertical[xIndex[0]], { x: x - 20, duration: .5 })
+            const offsetx = x + width + Xoffset
+            const offsety = y + height + Yoffset
+            tl.to(vertical[xIndex[0]], { x: x - Xoffset, duration: .5 })
             tl.to(vertical[xIndex[1]], { x: offsetx, duration: .5 }, '<')
-            tl.to(horizontal[yIndex[0]], { y: y - 10, duration: .5 }, '<')
+            tl.to(horizontal[yIndex[0]], { y: y - Yoffset, duration: .5 }, '<')
             tl.to(horizontal[yIndex[1]], { y: offsety, duration: .5 }, '<')
         },
         HandleMouseLeave: () => {
