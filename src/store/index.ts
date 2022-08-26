@@ -5,7 +5,8 @@ import actions from './actions'
 import modules from './modules'
 
 export interface State {
-    audioStatus: boolean
+    audioStatus: boolean,
+    noices: string[],
 }
 
 export const key: InjectionKey<Store<State>> = Symbol()
@@ -13,6 +14,7 @@ export const key: InjectionKey<Store<State>> = Symbol()
 export const store = createStore<State>({
     state: {
         audioStatus: false,
+        noices: ['<span class="text">S</span>', 'C', 'R', 'O', 'L', 'L', '&nbsp', 'T', 'O', '&nbsp', 'D', 'I', 'S', 'C', 'O', 'V', 'E', 'R'],
     },
     mutations,
     actions,

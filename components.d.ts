@@ -8,6 +8,7 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Music: typeof import('./src/components/base/music.vue')['default']
+    Progress: typeof import('./src/components/base/progress.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Smoke: typeof import('./src/components/home/smoke.vue')['default']

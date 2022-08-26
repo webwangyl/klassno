@@ -144,11 +144,13 @@ const HandleMouseLeave = () => gridTransform.HandleMouseLeave()
 		padding: 0 60px 0;
         z-index: 1;
 		display: flex;
+        flex-shrink: 0;
 		justify-content: space-between;
 		align-items: center;
 		.logo {
 			color: $color-inside;
 			font-size: 16px;
+            cursor: pointer;
 		}
 		.tab {
 			cursor: pointer;
@@ -165,10 +167,13 @@ const HandleMouseLeave = () => gridTransform.HandleMouseLeave()
 		}
 	}
 	.main {
-		height: auto;
 		width: 100%;
         overflow: auto;
 	}
+    .main::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+    }
 }
 .menu {
 	color: $color-inside;
