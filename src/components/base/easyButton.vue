@@ -34,7 +34,6 @@ const prop = defineProps<{
 }>()
 
 const type = ref(prop.type || 'right')
-console.log(type)
 
 onMounted(() => {
     horizontal = document.getElementsByClassName("horizontal");

@@ -30,7 +30,7 @@
 		<div class="glass-container">
 			<div class="frosted-glass glass-1">
 				<p class="page-title">PROFESSION</p>
-				<p class="info-text">
+				<p class="info-text" v-breakup="{ num: 10, classname: 'profession-first' }">
 					I graduated in July 2020. Before graduation, I had practiced in AsiaInfo for about half a year and started my Vue journey here.<br/>
 				</p>
 				<p class="info-text">
@@ -38,7 +38,7 @@
 					In terms of work arrangement, I will do more work on weex. I think that working on weex will affect my future development, so I came to another company, huaun, in May 2021.
 				</p>
 				<p class="info-text">
-					This is a start-up company in network security. My colleagues and leaders are very nice. Because there are not many start-up companies, I can independently take charge of the whole front-end project, from framework construction to specific business. This is a good training opportunity for me who has just graduated. The technology used here is nuxt, and all projects are on the PC side. Most of them are on the background management, and there are also some SaaS side projects, The company's architecture is developing in the direction of cloud nativity. For this reason, I also learned docker and Qiankun technologies.Although it can't satisfy my persistent pursuit of cool web, I still like it here.
+					This is a start-up company in network security. My colleagues and leaders are very nice. Because is start-up companies, I can independently take charge of the whole Web project, from framework construction to specific business. This is a good training opportunity for me who has just graduated. The technology used here is nuxt, and all projects are on the PC side. Most of them are on the management, and there are also some SaaS side projects, The company's architecture is developing in the direction of cloud nativity. For this reason, I also learned docker and qiankun technologies.Although it can't satisfy my persistent pursuit of cool web, I still like it here.
 				</p>
 				<easy-button class="button-p" @touch="next"></easy-button>
 			</div>
@@ -64,10 +64,29 @@
 <script lang="ts" setup>
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { onMounted, reactive } from "vue";
+import { onMounted, reactive, Directive } from "vue";
 import { useStore } from "../store";
 import { ElProgress } from "element-plus";
 import EasyButton from '@/components/base/easyButton.vue'
+
+const vBreakup:Directive<HTMLElement> = {
+    created: function(el, binding) {
+        // 拆碎段落
+        const source = el.innerText
+        let num = 1
+        let classname = ''
+        if (binding.value) {
+            num = binding.value.num
+            classname = binding.value.classname
+        }
+        const len = el.innerText.length
+        let template = ''
+        for (let i = 0; i < len; i+=num) {
+            template += '<span' + (classname ? ` class='${classname}'>` : '>') + source.slice(i, i + num) + '</span>'
+        }
+        el.innerHTML = template
+    }
+}
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -118,7 +137,7 @@ const init = () => {
 		},
 		x: 200,
 		scale: 0.1,
-		rotation: 360,
+		rotation: 180,
 		duration: 1,
 	})
 };
@@ -226,9 +245,9 @@ onMounted(() => {
         height: 500px;
 		overflow: hidden;
 		top: 50%;
-        left: 50%;
+        right: 150px;
 		display: flex;
-        transform: translate(-50%, -50%);
+        transform: translate(0, -50%);
 		box-shadow: 8px 8px 4px 0 rgba($color-inside, .2);
 	}
     .frosted-glass {
