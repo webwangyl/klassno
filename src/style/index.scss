@@ -1,11 +1,16 @@
 @import './format.scss';
+@import './animation.scss';
 
 html, body, #app {
     height: 100%;
 }
 
+body {
+    color: $color-inside;
+}
+
 #app {
-    min-width: 1280px;
+    min-width: 1440px;
     background-color: #131517;
 }
 
@@ -38,4 +43,39 @@ html, body, #app {
     text-indent: 24px;
     width: 100%;
     text-align: left;
+}
+
+.letter {
+    position: relative;
+    display: inline-block;
+    .letter-inner {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    .red {
+        color: red;
+        opacity: 1;
+        transform: translate(2px, -2px);
+    }
+    .green {
+        color: green;
+        opacity: 1;
+        transform: translate(-2px, 2px);
+    }
+    .yellow {
+        color: yellow;
+        opacity: 1;
+    }
+    .default {
+        color: $color-inside;
+        opacity: 0;
+    }
+}
+
+.menu-item:hover {
+    transform: translateX(-10px);
+    .default {
+        opacity: 1 !important;
+    }
 }

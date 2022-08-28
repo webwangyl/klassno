@@ -1,0 +1,23 @@
+{
+  "id": "3614689",
+  "name": "klassno",
+  "font_family": "knofont",
+  "css_prefix_text": "kno",
+  "description": "klassno",
+  "glyphs": [
+    {
+      "icon_id": "15838434",
+      "name": "back",
+      "font_class": "back",
+      "unicode": "e666",
+      "unicode_decimal": 58982
+    },
+    {
+      "icon_id": "12932078",
+      "name": "l-menu",
+      "font_class": "menu",
+      "unicode": "e795",
+      "unicode_decimal": 59285
+    }
+  ]
+}

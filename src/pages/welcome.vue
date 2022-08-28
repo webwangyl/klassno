@@ -16,7 +16,7 @@ const store = useStore()
 let timer = null
 const tl = gsap.timeline()
 const changeAudio = () => {
-    store.commit('SET_STATUS', !store.state.audioStatus)
+    store.commit('SET_STATUS', true)
     toHome()
 }
 const toHome = () => {

@@ -1,0 +1,50 @@
+@keyframes breath-light {
+    0% {
+        opacity: .7;
+        // box-shadow: 0 1px 2px $color-inside;
+    }
+    60% {
+        opacity: 1;
+        // box-shadow: 0 1px 30px $color-inside;
+    }
+    100% {
+        opacity: 1;
+        // box-shadow: 0 1px 30px $color-inside;
+    }
+}
+
+@keyframes slow-rotate {
+    0% {
+        transform: rotate(0);
+    }
+    50% {
+        transform: rotate(10deg);
+    }
+    100% {
+        transform: rotate(0);
+    }
+}
+
+@keyframes slow-translate {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(-20px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slow-translateY {
+    0% {
+        transform: translateY(-50%);
+    }
+    50% {
+        transform: translateY(calc(-50% - 20px));
+    }
+    100% {
+        transform: translateY(-50%);
+    }
+}
