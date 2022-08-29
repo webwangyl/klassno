@@ -8,7 +8,7 @@ const routes:RouteRecordRaw[] = [
         component: Welcome
     },
     {
-        path: '/home',
+        path: '/',
         name: 'default',
         component: () => import('@/layouts/default.vue'),
         children: [
@@ -16,6 +16,11 @@ const routes:RouteRecordRaw[] = [
                 path: '/home',
                 name: 'home',
                 component: () => import('@/pages/home.vue')
+            },
+            {
+                path: '/blog',
+                name: 'blog',
+                component: () => import('@/pages/blog.vue')
             },
         ],
     },

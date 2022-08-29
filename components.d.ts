@@ -10,7 +10,6 @@ declare module '@vue/runtime-core' {
     EasyButton: typeof import('./src/components/base/easyButton.vue')['default']
     Grid: typeof import('./src/components/grid.vue')['default']
     Header: typeof import('./src/components/base/header.vue')['default']
-    Menu: typeof import('./src/components/menu.vue')['default']
     Music: typeof import('./src/components/base/music.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

@@ -159,11 +159,10 @@ const toWelcome = () => {
 
 const jumpVertify = (url: string, index: number) => {
     const currentPath = router.currentRoute?.value?.fullPath
-    if (url == currentPath) {
-        expandTab()
-    } else {
+    if (url != currentPath) {
         router.push(url)
     }
+    expandTab()
 }
 
 const resize = () => {
