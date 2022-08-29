@@ -9,7 +9,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "echarts": "^5.3.3",
     "element-plus": "^2.2.14",
     "gsap": "^3.11.0",
     "vue": "^3.2.37",
