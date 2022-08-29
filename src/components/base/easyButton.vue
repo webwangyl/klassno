@@ -17,12 +17,6 @@
 import { onMounted, defineEmits, defineProps, ref } from 'vue'
 import useGridTransform, { GridTransform } from "../../hooks/useGridTransform";
 
-const horizontalY = [];
-const verticalX = [];
-let yIndex = [];
-let xIndex = [];
-let horizontal: HTMLCollection;
-let vertical: HTMLCollection;
 let gridTransform: GridTransform;
 
 const emit = defineEmits<{
@@ -36,31 +30,13 @@ const prop = defineProps<{
 const type = ref(prop.type || 'right')
 
 onMounted(() => {
-    horizontal = document.getElementsByClassName("horizontal");
-	vertical = document.getElementsByClassName("vertical");
-	Array.from(horizontal).forEach((el) => {
-		const rect = el.getBoundingClientRect();
-		horizontalY.push(rect.y);
-	});
-	Array.from(vertical).forEach((el) => {
-		const rect = el.getBoundingClientRect();
-		verticalX.push(rect.x);
-	});
-	gridTransform = useGridTransform({
-		vertical,
-		verticalX,
-		xIndex,
-		horizontal,
-		horizontalY,
-		yIndex,
-	});
+	gridTransform = useGridTransform();
 })
 const HandleMouseEnter = (e: MouseEvent) => {
     gridTransform.HandleMouseEnter(e)
 }
 const HandleMouseLeave = () => gridTransform.HandleMouseLeave()
 const HandleClick = (e: MouseEvent) => {
-    console.log(emit)
     emit('touch', e)
 }
 

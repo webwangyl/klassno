@@ -44,6 +44,7 @@ onMounted(() => {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 .welcome-text {
     font-size: 40px;

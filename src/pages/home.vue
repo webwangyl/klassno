@@ -179,7 +179,7 @@ const back = () => {
 	})
 }
 
-const skip = (key) => {
+const skip = (key: string) => {
 	switch (key) {
 		case 'profession':
 			if (profession) profession.timeScale(20)
@@ -209,15 +209,11 @@ onMounted(() => {
 	padding: 16px;
 }
 .home {
-	width: 100%;
-	color: $color-inside;
 	display: flex;
 	align-items: center;
-	z-index: 0;
 	.glass {
 		flex: 4;
 		height: 600px;
-		filter: sepia(40%);
 		transform: translateX(calc(-100% - 30px));
 		text-align: center;
 		.home-bg {
@@ -231,30 +227,9 @@ onMounted(() => {
 		padding-left: 60px;
 		position: relative;
 		.grow {
-			position: absolute;
 			height: 120px;
 			right: 100px;
 			top: calc(50% - 100px);
-			.grow-background {
-				background-color: $noice-text;
-				width: 1px;
-				height: 100%;
-				position: absolute;
-				transform-origin: bottom;
-				animation: grow-line 4s infinite;
-			}
-			.triangle {
-				display: block;
-				position: absolute;
-				bottom: -4px;
-				left: -4px;
-				width: 0;
-				height: 0;
-				border-left: 5px solid transparent;
-				border-right: 5px solid transparent;
-				border-top: 5px solid $noice-text;
-				animation: hidden-triangle 4s infinite;
-			}
 		}
 		.noice-position {
 			position: absolute;
@@ -294,7 +269,7 @@ onMounted(() => {
         left: 100px;
 		display: flex;
         transform: translate(0, -50%);
-		box-shadow: 8px 8px 4px 0 rgba($color-inside, .2);
+		box-shadow: 8px 8px 4px 0 rgba(#5BBAFE, .8);
 	}
     .frosted-glass {
 		width: 100%;
@@ -305,7 +280,12 @@ onMounted(() => {
 		position: relative;
         padding: 12px;
         align-items: center;
-        background: radial-gradient(closest-side, rgba($color-theme, .2), rgba($color-inside, .2));
+        // background: radial-gradient(closest-side, rgba($color-theme, .2), rgba($color-inside, .2));
+        background-image: linear-gradient(161deg, #FDCD9B -20%, #5BBAFE 85%);
+        background-position: bottom 90%;
+        .info-text {
+            color: $color-inside;
+        }
 		.button-p {
 			position: absolute;
 			bottom: 20px;
@@ -333,46 +313,6 @@ onMounted(() => {
 			cursor: pointer;
 		}
     }
-    .frosted-glass::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        filter: blur(12px);
-    }
-}
-
-@keyframes grow-line {
-	0% {
-		height: 0;
-		transform: translateY(0);
-	}
-	15% {
-		height: 100%;
-		transform: translateY(0);
-	}
-	85% {
-		height: 100%;
-		transform: translateY(0);
-	}
-	100% {
-		height: 0;
-		transform-origin: bottom;
-		transform: translateY(200px);
-	}
-}
-@keyframes hidden-triangle {
-	0% {
-		transform: scale(1);
-	}
-	70% {
-		transform: scale(1);
-	}
-	100% {
-		transform: scale(0);
-	}
 }
 
 @media screen and (min-width: 1680px) {
