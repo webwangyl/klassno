@@ -5,10 +5,10 @@
             <img class="user-header" src="@/assets/images/blog/header.jpeg" alt="">
             <p class="info-text user-introduce">Hello,I'm ulin Wang and that is my cool face.</p>
             <p class="elsewhere">Elsewhere</p>
-            <div class="elsewhere-box">
-                <div class="elsewhere-list" v-for="item in elsewhereList" :key="item.label">
-                    <img class="elsewhere-icon" :src="required(item.src)" alt="">
-                    <span class="elsewhere-span">{{ item.label }}</span>
+            <div class="elsewhere-box" @click="toElsewhere">
+                <div class="elsewhere-list" v-for="item in elsewhereList" :key="item.label" :data-url="item.url">
+                    <img class="elsewhere-icon" :src="required(item.src)" :data-url="item.url" alt="">
+                    <span class="elsewhere-span" :data-url="item.url">{{ item.label }}</span>
                 </div>
             </div>
         </div>
@@ -20,9 +20,16 @@ const required = (name: string) => {
   return new URL(`/src/assets/images/blog/${name}.png`, import.meta.url).href
 }
 const elsewhereList = [
-    { src: 'github', label: 'github' },
-    { src: 'Sina-Weibo', label: 'Sina-Weibo' }
+    { src: 'github', label: 'github', url: 'https://github.com/webwangyl', },
+    { src: 'Sina-Weibo', label: 'Sina-Weibo', url: '' }
 ]
+const toElsewhere = (e: MouseEvent) => {
+    const url = (e.target as HTMLElement).getAttribute('data-url')
+    if (url) {
+        window.open(url, '_target')
+    }
+    console.log((e.target as HTMLElement).getAttribute('data-url'))
+}
 </script>
 
 <style lang="scss" scoped>
@@ -69,6 +76,7 @@ const elsewhereList = [
                 display: flex;
                 height: 30px;
                 align-items: center;
+                cursor: pointer;
                 .elsewhere-icon {
                     width: 20px;
                     height: 20px;
