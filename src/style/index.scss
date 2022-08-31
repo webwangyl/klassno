@@ -6,17 +6,17 @@ html, body, #app {
 }
 
 body {
-    color: $color-inside;
+    color: var(--color-inside);
 }
 
 #app {
     min-width: 1440px;
-    background-color: #131517;
+    background-color: var(--color-theme);
 }
 
 .noice-text {
     // 全局提示文字样式
-    color: $noice-text;
+    color: var(--noice-text);
     font-size: 14px;
     letter-spacing: .2em;
     text-transform: uppercase;
@@ -26,7 +26,7 @@ body {
 
 .page-title {
     // 页面中的标题
-    color: $primary-first-title;
+    color: var(--color-inside);
     font-size: 42px;
     font-weight: 100;
     letter-spacing: .2em;
@@ -36,7 +36,7 @@ body {
 
 .info-text {
     // 正文
-    color: $primary-text;
+    color: var(--primary-text);
     font-size: 14px;
     font-weight: 200;
     letter-spacing: 0.5px;
@@ -70,7 +70,7 @@ body {
         opacity: 1;
     }
     .default {
-        color: $color-inside;
+        color: var(--color-inside);
         opacity: 0;
     }
 }
@@ -79,7 +79,7 @@ body {
     // 下拉箭头
     position: absolute;
     .grow-background {
-        background-color: $noice-text;
+        background-color: var(--noice-text);
         width: 1px;
         height: 100%;
         position: absolute;
@@ -95,7 +95,7 @@ body {
         height: 0;
         border-left: 5px solid transparent;
         border-right: 5px solid transparent;
-        border-top: 5px solid $noice-text;
+        border-top: 5px solid var(--noice-text);
         animation: hidden-triangle 4s infinite;
     }
 }

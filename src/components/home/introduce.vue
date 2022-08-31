@@ -147,7 +147,7 @@ onMounted(() => init())
         left: 100px;
 		display: flex;
         transform: translate(0, -50%);
-		box-shadow: 8px 8px 4px 0 rgba(#5BBAFE, .8);
+		box-shadow: 8px 8px 4px 0 #5BBAFE;
 	}
     .frosted-glass {
 		width: 100%;
@@ -158,11 +158,10 @@ onMounted(() => init())
 		position: relative;
         padding: 12px;
         align-items: center;
-        // background: radial-gradient(closest-side, rgba($color-theme, .2), rgba($color-inside, .2));
         background-image: linear-gradient(161deg, #FDCD9B -20%, #5BBAFE 85%);
         background-position: bottom 90%;
         .info-text {
-            color: $color-inside;
+            color: var(--color-inside);
         }
 		.button-p {
 			position: absolute;
@@ -178,7 +177,7 @@ onMounted(() => init())
 			width: 40px;
 			height: 20px;
 			border-radius: 10px;
-			background-color: rgba($color-theme, .5);
+			background-color: var(--color-theme);
 			line-height: 20px;
 			text-align: center;
 			font-weight: 100;
@@ -187,7 +186,7 @@ onMounted(() => init())
 			bottom: 20px;
 			left: 50%;
 			transform: translateX(-50%);
-			color: $primary-text;
+			color: var(--primary-text);
 			cursor: pointer;
 		}
     }

@@ -193,7 +193,7 @@ const resize = () => {
   }
   .tab {
     cursor: pointer;
-    color: rgba($color-inside, 0.8);
+    color: var(--color-inside);
     height: 40px;
     line-height: 40px;
     font-size: 14px;
@@ -204,12 +204,12 @@ const resize = () => {
       120deg,
       transparent 0%,
       transparent 50%,
-      $color-inside 50%
+      var(--color-inside) 50%
     );
     -webkit-background-clip: text;
     background-clip: text;
     background-size: 200%;
-    background-color: $color-theme;
+    background-color: var(--color-theme);
     .knofont {
       font-size: 16px;
       vertical-align: middle;
@@ -227,7 +227,7 @@ const resize = () => {
   top: 40px;
   right: 60px;
   z-index: -1;
-  background-color: $color-theme;
+  background-color: var(--color-theme);
   .menu-container {
     height: 100%;
     .menu-list {

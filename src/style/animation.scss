@@ -1,15 +1,15 @@
 @keyframes breath-light {
     0% {
         opacity: .7;
-        // box-shadow: 0 1px 2px $color-inside;
+        // box-shadow: 0 1px 2px var(--color-inside);
     }
     60% {
         opacity: 1;
-        // box-shadow: 0 1px 30px $color-inside;
+        // box-shadow: 0 1px 30px var(--color-inside);
     }
     100% {
         opacity: 1;
-        // box-shadow: 0 1px 30px $color-inside;
+        // box-shadow: 0 1px 30px var(--color-inside);
     }
 }
 

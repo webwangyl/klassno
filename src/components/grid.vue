@@ -53,7 +53,7 @@
     opacity: 0.2;
     transition: transform 0.6s cubic-bezier(0.75, 0, 0.25, 1);
     transition-delay: 0;
-    background-color: $color-inside;
+    background-color: var(--color-inside);
   }
   .vertical {
     left: 0;

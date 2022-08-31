@@ -37,7 +37,7 @@ const toElsewhere = (e: MouseEvent) => {
     width: calc(100% - 300px);
     min-height: calc(100vh - 180px);
     margin: 0 auto;
-    background-color: #333;
+    background-color: var(--background-blod);
     border-radius: 20px;
     display: flex;
     padding: 20px 0;
@@ -62,8 +62,8 @@ const toElsewhere = (e: MouseEvent) => {
             padding-bottom: 4px;
             text-align: left;
             width: 100%;
-            color: $primary-second-title;
-            border-bottom: 1px solid $primary-second-title;
+            color: var(--primary-second-title);
+            border-bottom: 1px solid var(--primary-second-title);
         }
         .elsewhere-box {
             display: flex;
@@ -83,7 +83,7 @@ const toElsewhere = (e: MouseEvent) => {
                     margin-right: 8px;
                 }
                 .elsewhere-span {
-                    color: $primary-text;
+                    color: var(--primary-text);
                     font-size: 14px;
                 }
             }

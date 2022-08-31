@@ -46,7 +46,7 @@ const HandleClick = (e: MouseEvent) => {
 .easy-button {
     width: 40px;
     height: 40px;
-    border: 1px solid rgba($color-inside, .4);
+    border: 1px solid var(--color-inside);
     border-radius: 50%;
     cursor: pointer;
     text-align: center;
@@ -79,7 +79,7 @@ const HandleClick = (e: MouseEvent) => {
                 width: 15px;
                 left: -6px;
                 height: 1px;
-                background-color: $color-inside;
+                background-color: var(--color-inside);
             }
             .triangle {
                 position: absolute;
@@ -88,7 +88,7 @@ const HandleClick = (e: MouseEvent) => {
                 width: 6px;
                 height: 7px;
                 border-top: 3.5px solid transparent;
-                border-left: 3.5px solid $color-inside;
+                border-left: 3.5px solid var(--color-inside);
                 border-bottom: 3.5px solid transparent;
             }
         }
@@ -107,7 +107,7 @@ const HandleClick = (e: MouseEvent) => {
             .triangle {
                 left: 8px;
                 border-top: 3.5px solid transparent;
-                border-left: 3.5px solid $color-inside;
+                border-left: 3.5px solid var(--color-inside);
                 border-bottom: 3.5px solid transparent;
             }
         }
@@ -118,7 +118,7 @@ const HandleClick = (e: MouseEvent) => {
             .triangle {
                 left: -8px;
                 border-top: 3.5px solid transparent;
-                border-right: 3.5px solid $color-inside;
+                border-right: 3.5px solid var(--color-inside);
                 border-left: none;
                 border-bottom: 3.5px solid transparent;
             }
@@ -126,7 +126,7 @@ const HandleClick = (e: MouseEvent) => {
     }
 }
 .easy-button:hover {
-    border: 1px solid $color-inside;
+    border: 1px solid var(--color-inside);
     .icon .arrow-right {
         transform: translateX(30px);
     }

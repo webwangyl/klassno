@@ -16,8 +16,7 @@ declare module '@vue/runtime-core' {
     Profile: typeof import('./src/components/home/profile.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    Scatter: typeof import('./src/components/base/scatter.vue')['default']
     Smoke: typeof import('./src/components/base/smoke.vue')['default']
-    Theme: typeof import('./src/components/base/theme.vue')['default']
+    Theme: typeof import('./src/components/base/theme/theme.vue')['default']
   }
 }

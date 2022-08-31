@@ -14,6 +14,7 @@ export interface State {
     audioStatus: boolean,
     noices: string[],
     menuList: MenuItem[],
+    theme: string,
 }
 
 export const key: InjectionKey<Store<State>> = Symbol()
@@ -28,6 +29,7 @@ export const store = createStore<State>({
             { key: 'Timeline', label: 'Timeline', url: '/Timeline' },
             { key: 'sugar', label: 'The Beauty Of Data', url: '/sugar' },
         ],
+        theme: '',
     },
     mutations,
     actions,

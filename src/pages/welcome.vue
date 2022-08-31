@@ -48,14 +48,14 @@ onMounted(() => {
 }
 .welcome-text {
     font-size: 40px;
-    color: $primary-first-title;
+    color: var(--color-inside);
     cursor: pointer;
     margin-bottom: 16px;
     text-align: center;
 }
 .ignore-text {
     font-size: 12px;
-    color: $primary-text;
+    color: var(--primary-text);
     cursor: pointer;
     text-align: center;
 }
