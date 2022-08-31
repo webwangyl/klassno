@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, defineEmits, defineProps, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import useGridTransform, { GridTransform } from "../../hooks/useGridTransform";
 
 let gridTransform: GridTransform;

@@ -4,6 +4,7 @@
     <span class="i18n" :class="{ 'select': language === 'CH' }">CH</span>
     <span class="i18n" :class="{ 'select': language === 'EN' }">EN</span>
   </div>
+  <Theme class="theme"></Theme>
   <Music class="root-music"></Music>
   <audio id="audio" loop src="/media/minecraft.mp3">几几年了？还用那垃圾浏览器</audio>
 </template>
@@ -13,6 +14,7 @@
 import { onMounted, watch, computed } from "vue";
 import { useStore } from './store'
 import Music from "./components/base/music.vue";
+import Theme from "./components/base/theme.vue"
 
 const store = useStore()
 let audio: HTMLAudioElement;
@@ -58,5 +60,10 @@ onMounted(() => {
   .i18n:hover, .i18n.select {
     color: $color-inside;
   }
+}
+.theme {
+  position: fixed;
+  bottom: 28px;
+  right: 300px;
 }
 </style>

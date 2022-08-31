@@ -7,12 +7,17 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    Book: typeof import('./src/components/home/book.vue')['default']
     EasyButton: typeof import('./src/components/base/easyButton.vue')['default']
     Grid: typeof import('./src/components/grid.vue')['default']
     Header: typeof import('./src/components/base/header.vue')['default']
+    Introduce: typeof import('./src/components/home/introduce.vue')['default']
     Music: typeof import('./src/components/base/music.vue')['default']
+    Profile: typeof import('./src/components/home/profile.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    Smoke: typeof import('./src/components/home/smoke.vue')['default']
+    Scatter: typeof import('./src/components/base/scatter.vue')['default']
+    Smoke: typeof import('./src/components/base/smoke.vue')['default']
+    Theme: typeof import('./src/components/base/theme.vue')['default']
   }
 }

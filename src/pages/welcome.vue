@@ -11,7 +11,7 @@ import { useStore } from '../store'
 import { onMounted } from 'vue'
 import { router } from '../router'
 import gsap from 'gsap'
-import Smoke from '@/components/home/smoke.vue'
+import Smoke from '@/components/base/smoke.vue'
 const store = useStore()
 let timer = null
 const tl = gsap.timeline()
