@@ -8,9 +8,9 @@
             <div class="my-button" @click="init">reset</div>
             <div @click="save">save</div>
         </div>
-        <div id="preview" class="preview-container">
+        <div class="preview-container">
             <p class="page-title">PREVIEW</p>
-            <div class="preview-content">
+            <div id="preview" class="preview-content">
                 <div class="preview">
                     <Profile :preview="preview"></Profile>
                 </div>
@@ -23,18 +23,39 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, reactive } from 'vue'
+import { onMounted, reactive, computed, watch } from 'vue'
 import { ElColorPicker } from 'element-plus'
 import dark from '../theme/dark';
+import light from '../theme/light';
 import { Itheme } from '../theme/Itheme'
 import Profile from '../components/home/profile.vue';
 import Blog from './blog.vue'
+import { useStore } from '../store'
 
 const preview = true
-const colors: Itheme[] = reactive(dark)
+const store = useStore()
+
+let colors: Itheme[] = reactive(dark.slice())
+
+const theme = computed(() => store.state.theme)
+watch(theme, (nval) => {
+    if (nval === 'dark') {
+        colors = reactive(dark.slice())
+        setPreviewProperty()
+    } else if (nval === 'light') {
+        colors = reactive(light.slice())
+        setPreviewProperty()
+    }
+})
 
 const app = document.documentElement
 let previewElement: HTMLElement
+
+const setPreviewProperty = () => {
+    colors.forEach(colorItem => {
+        previewElement.style.setProperty(colorItem.key, colorItem.value)
+    })
+}
 
 const init = () => {
     previewElement = document.getElementById('preview') as HTMLElement
@@ -42,16 +63,17 @@ const init = () => {
         const value = app.style.getPropertyValue(themeItem.key)
         const key = themeItem.key
         const label = themeItem.label
-        previewElement.style.setProperty(key, value)
-        const i = colors.findIndex(item => item.key == key)
+        const i = colors.findIndex(item => item.key === key)
         colors.splice(i ,1, { key, value, label })
     })
+    setPreviewProperty()
 }
 
 const save = () => {
     colors.forEach(colorItem => {
         app.style.setProperty(colorItem.key, colorItem.value)
     })
+    store.commit('SET_THEME', 'custom')
 }
 
 onMounted(() => init())

@@ -38,7 +38,13 @@ const store = useStore();
 let audio: HTMLAudioElement;
 
 const language = "EN";
+
+const stateTheme = computed(() => store.state.theme)
+
 let theme = ref("");
+watch(stateTheme, (nval) => {
+  theme.value = nval
+})
 
 let app: HTMLElement;
 
