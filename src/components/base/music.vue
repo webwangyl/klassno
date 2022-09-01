@@ -1,5 +1,6 @@
 <template>
 	<svg
+		id="music"
 		version="1.1"
 		xmlns="http://www.w3.org/2000/svg"
 		viewBox="0 0 800 300"
@@ -9,9 +10,8 @@
 	>
 		<path
 			id="line"
-			stroke="#fff"
+			:style="{ stroke: strokeColor, fill: strokeColor }"
 			stroke-width="10"
-			fill="#fff"
 			d="M -200 150 q 100 -50 200 0 q 100 50 200 0 q 100 -50 200 0 q 100 50 200 0 q 100 -50 200 0 q 100 50 200 0 q 100 -50 200 0 q 100 50 200 0 q 100 -50 200 0 q 100 50 200 0 q 100 -50 200 0"
 		></path>
 	</svg>
@@ -19,7 +19,7 @@
 
 <script setup lang="ts">
 import { gsap } from "gsap";
-import { onMounted, watch, computed } from "vue";
+import { onMounted, watch, computed, ref } from "vue";
 import { useStore } from "../../store";
 
 const store = useStore();
@@ -32,6 +32,13 @@ watch(status, (nval) => {
 		timeline.pause();
 	}
 });
+
+const theme = computed(() => store.state.theme);
+let strokeColor = ref('')
+watch(theme, () => {
+	const app = document.documentElement
+	strokeColor.value = app.style.getPropertyValue('--color-inside')
+})
 
 let timeline: any = "";
 

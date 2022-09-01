@@ -7,6 +7,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    ArrowButton: typeof import('./src/components/base/arrowButton.vue')['default']
     Book: typeof import('./src/components/home/book.vue')['default']
     EasyButton: typeof import('./src/components/base/easyButton.vue')['default']
     Grid: typeof import('./src/components/grid.vue')['default']

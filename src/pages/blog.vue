@@ -1,6 +1,6 @@
 <template>
     <div class="blog-container">
-        <div class="blog-content"></div>
+        <div class="blog-content" v-if="!preview"></div>
         <div class="blog-user">
             <img class="user-header" src="@/assets/images/blog/header.jpeg" alt="">
             <p class="info-text user-introduce">Hello,I'm ulin Wang and that is my cool face.</p>
@@ -16,6 +16,10 @@
 </template>
 
 <script lang="ts" setup>
+const prop = defineProps<{
+    preview?: boolean
+}>()
+const preview = prop.preview || false
 const required = (name: string) => {
   return new URL(`/src/assets/images/blog/${name}.png`, import.meta.url).href
 }
@@ -28,14 +32,13 @@ const toElsewhere = (e: MouseEvent) => {
     if (url) {
         window.open(url, '_target')
     }
-    console.log((e.target as HTMLElement).getAttribute('data-url'))
 }
 </script>
 
 <style lang="scss" scoped>
 .blog-container {
     width: calc(100% - 300px);
-    min-height: calc(100vh - 180px);
+    min-height: calc(100vh - 240px);
     margin: 0 auto;
     background-color: var(--background-blod);
     border-radius: 20px;

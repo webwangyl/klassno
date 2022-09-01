@@ -1,6 +1,6 @@
 <template>
-    <div class="home">
-		<div class="glass">
+    <div class="profile">
+		<div class="glass" v-if="!preview">
 			<img class="home-bg" src="@/assets/images/home.png" alt="">
 		</div>
 		<div class="content">
@@ -23,8 +23,17 @@
 
 <script lang="ts" setup>
 import gsap from "gsap"
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useStore } from "../../store";
+
+const prop = defineProps<{
+    preview?: boolean,
+}>()
+
+console.log(prop)
+
+const preview = ref(prop.preview || false)
+console.log(preview.value)
 
 const store = useStore();
 
@@ -52,9 +61,10 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-.home {
+.profile {
 	display: flex;
 	align-items: center;
+	height: 100%;
 	.glass {
 		flex: 4;
 		height: 600px;

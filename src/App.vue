@@ -27,8 +27,10 @@
 </template>
 
 <script setup lang="ts">
-// This starter template is using Vue 3 <script setup> SFCs
 import { onMounted, watch, computed, ref } from "vue";
+import dark from './theme/dark'
+import light from './theme/light'
+import { Itheme } from './theme/Itheme'
 import { useStore } from "./store";
 import Music from "./components/base/music.vue";
 
@@ -37,28 +39,6 @@ let audio: HTMLAudioElement;
 
 const language = "EN";
 let theme = ref("");
-interface Itheme {
-  key: string,
-  value: string,
-}
-
-const dark:Itheme[] = [
-  { key: "--color-theme", value: "#131517" },
-  { key: "--background-blod", value: "#333" },
-  { key: "--color-inside", value: "#fff" },
-  { key: "--primary-second-title", value: "#e7e8e8" },
-  { key: "--primary-text", value: "#d0d0d1" },
-  { key: "--noice-text", value: "#ffe660" },
-];
-
-const light:Itheme[] = [
-  { key: "--color-theme", value: "#e7e7e7" },
-  { key: "--background-blod", value: "#f1f1f1" },
-  { key: "--color-inside", value: "#131517" },
-  { key: "--primary-second-title", value: "#1e1e1e" },
-  { key: "--primary-text", value: "#545151" },
-  { key: "--noice-text", value: "#005eef" },
-];
 
 let app: HTMLElement;
 

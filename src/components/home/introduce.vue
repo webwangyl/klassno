@@ -28,7 +28,7 @@
 					On the web, there is no doubt that I like cool, animation, etc. a cool page will stimulate my desire to explore and make me want to complete it myself (most of them will fail haha)
 				</p>
 				<div v-if="skipHobby" class="skip-text" @click="skip('hobby')">skip</div>
-				<easy-button class="button-bp" type="left" @touch="back"></easy-button>
+				<arrow-button class="button-bp" type="left" @touch="back"></arrow-button>
 			</div>
 		</div>
 		<img class="introduce-bg" src="@/assets/images/introduce.png" alt="">
@@ -38,7 +38,7 @@
 <script lang="ts" setup>
 import gsap from 'gsap'
 import { ref, onMounted } from 'vue'
-import EasyButton from '@/components/base/easyButton.vue'
+import ArrowButton from '@/components/base/arrowButton.vue'
 
 let skipProfession = ref(true)
 let skipHobby = ref(true)
@@ -186,7 +186,7 @@ onMounted(() => init())
 			bottom: 20px;
 			left: 50%;
 			transform: translateX(-50%);
-			color: var(--primary-text);
+			color: var(--noice-text);
 			cursor: pointer;
 		}
     }

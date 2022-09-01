@@ -22,6 +22,11 @@ const routes:RouteRecordRaw[] = [
                 name: 'blog',
                 component: () => import('@/pages/blog.vue')
             },
+            {
+                path: '/theme',
+                name: 'theme',
+                component: () => import('@/pages/theme.vue')
+            },
         ],
     },
 ]

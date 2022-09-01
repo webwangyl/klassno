@@ -26,7 +26,8 @@ export const store = createStore<State>({
         menuList: [
             { key: 'home', label: 'Home', url: '/home' },
             { key: 'blog', label: 'My Blog', url: '/blog' },
-            { key: 'Timeline', label: 'Timeline', url: '/Timeline' },
+            { key: 'timeline', label: 'Timeline', url: '/Timeline' },
+            { key: 'theme', label: 'Custom Theme', url: '/theme' },
             { key: 'sugar', label: 'The Beauty Of Data', url: '/sugar' },
         ],
         theme: '',
