@@ -3,7 +3,7 @@
         <div class="color-picker-container">
             <div class="color-picker-item" v-for="item in colors" :key="item.key">
                 <label>{{ item.label }}</label>
-                <el-color-picker class="color-picker" v-model="item.value" size="small" popper-class="color-picker-pop" show-alpha @change="change(item, $event)"></el-color-picker>
+                <el-color-picker class="color-picker" v-model="item.value" size="small" popper-class="color-picker-pop" show-alpha @change="change(item)"></el-color-picker>
             </div>
             <div class="operater">
                 <div class="my-button" @click="init">reset</div>
