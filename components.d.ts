@@ -9,7 +9,6 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     ArrowButton: typeof import('./src/components/base/arrowButton.vue')['default']
     Book: typeof import('./src/components/home/book.vue')['default']
-    EasyButton: typeof import('./src/components/base/easyButton.vue')['default']
     Grid: typeof import('./src/components/grid.vue')['default']
     Header: typeof import('./src/components/base/header.vue')['default']
     Introduce: typeof import('./src/components/home/introduce.vue')['default']
@@ -18,6 +17,5 @@ declare module '@vue/runtime-core' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Smoke: typeof import('./src/components/base/smoke.vue')['default']
-    Theme: typeof import('./src/components/base/theme/theme.vue')['default']
   }
 }

@@ -14,7 +14,7 @@
 					This is a start-up company in network security. My colleagues and leaders are very nice. Because is start-up companies, I can independently take charge of the whole Web project, from framework construction to specific business. This is a good training opportunity for me who has just graduated. The technology used here is nuxt, and all projects are on the PC side. Most of them are on the management, and there are also some SaaS side projects, The company's architecture is developing in the direction of cloud nativity. For this reason, I also learned docker and qiankun technologies.Although it can't satisfy my persistent pursuit of cool web, I still like it here.
 				</p>
 				<div v-if="skipProfession" class="skip-text" @click="skip('profession')">skip</div>
-				<easy-button class="button-p" @touch="next"></easy-button>
+				<arrow-button class="button-p" @touch="next"></arrow-button>
 			</div>
 			<div class="frosted-glass glass-2">
 				<p class="page-title">HOBBY</p>

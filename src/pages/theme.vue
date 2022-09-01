@@ -5,8 +5,10 @@
                 <label>{{ item.label }}</label>
                 <el-color-picker class="color-picker" v-model="item.value" size="small" popper-class="color-picker-pop" show-alpha @change="change(item, $event)"></el-color-picker>
             </div>
-            <div class="my-button" @click="init">reset</div>
-            <div @click="save">save</div>
+            <div class="operater">
+                <div class="my-button" @click="init">reset</div>
+                <div class="my-button" @click="save">save</div>
+            </div>
         </div>
         <div class="preview-container">
             <p class="page-title">PREVIEW</p>
@@ -26,7 +28,6 @@
 import { onMounted, reactive, computed, watch } from 'vue'
 import { ElColorPicker } from 'element-plus'
 import dark from '../theme/dark';
-import light from '../theme/light';
 import { Itheme } from '../theme/Itheme'
 import Profile from '../components/home/profile.vue';
 import Blog from './blog.vue'
@@ -36,17 +37,6 @@ const preview = true
 const store = useStore()
 
 let colors: Itheme[] = reactive(dark.slice())
-
-const theme = computed(() => store.state.theme)
-watch(theme, (nval) => {
-    if (nval === 'dark') {
-        colors = reactive(dark.slice())
-        setPreviewProperty()
-    } else if (nval === 'light') {
-        colors = reactive(light.slice())
-        setPreviewProperty()
-    }
-})
 
 const app = document.documentElement
 let previewElement: HTMLElement
@@ -101,6 +91,22 @@ const change = ({ key, value }) => {
                 height: 40px;
             }
         }
+        .operater {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 10px;
+        }
+        .my-button {
+            height: 48px;
+            width: 48px;
+            border-radius: 50%;
+            border: 1px solid var(--primary-text);
+            text-align: center;
+            line-height: 48px;
+            cursor: pointer;
+            color: var(--primary-text);
+            display: inline-block;
+        }
     }
     .preview-container {
         flex: 1;
@@ -114,7 +120,7 @@ const change = ({ key, value }) => {
             .preview {
                 flex: 1;
                 padding: 20px;
-                border: 5px solid rgb(99, 91, 23);
+                border: 15px solid rgb(104, 96, 26);
                 margin: 0 12px;
                 background-color: var(--color-theme);
                 &:deep(.blog-container) {
