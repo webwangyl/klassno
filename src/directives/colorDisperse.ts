@@ -1,5 +1,4 @@
 export default {
-    // 文字色散拆分，为了性能考虑单词数量小于等于20才进行拆分
     created(el: HTMLElement, binding) {
         const text = el.innerText
         const len = text.length
@@ -22,6 +21,8 @@ export default {
                     </span>
                 `
             }
+        } else {
+            template = el.innerText
         }
         el.innerHTML = template
     }

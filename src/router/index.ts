@@ -29,6 +29,11 @@ const routes:RouteRecordRaw[] = [
             },
         ],
     },
+    {
+        path: '/sugar',
+        name: 'sugar',
+        component: () => import('@/pages/sugar.vue')
+    },
 ]
 
 export const router = createRouter({

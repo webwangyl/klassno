@@ -9,6 +9,8 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     ArrowButton: typeof import('./src/components/base/arrowButton.vue')['default']
     Book: typeof import('./src/components/home/book.vue')['default']
+    Chart: typeof import('./src/components/chart.vue')['default']
+    Coins: typeof import('./src/components/sugar/coins.vue')['default']
     Grid: typeof import('./src/components/grid.vue')['default']
     Header: typeof import('./src/components/base/header.vue')['default']
     Introduce: typeof import('./src/components/home/introduce.vue')['default']

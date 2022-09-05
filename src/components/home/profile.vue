@@ -30,10 +30,7 @@ const prop = defineProps<{
     preview?: boolean,
 }>()
 
-console.log(prop)
-
 const preview = ref(prop.preview || false)
-console.log(preview.value)
 
 const store = useStore();
 
