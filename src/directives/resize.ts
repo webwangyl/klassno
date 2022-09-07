@@ -20,7 +20,7 @@ const vResize:Directive<IInterval> = {
             function isReize() {
                 const style = document.defaultView.getComputedStyle(el)
                 if (width !== style.width || height !== style.height) {
-                    binding.value() // 关键
+                    binding.value()
                 }
                 width = style.width
                 height = style.height

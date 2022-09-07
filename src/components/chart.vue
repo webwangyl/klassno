@@ -4,17 +4,23 @@
 
 <script lang="ts" setup>
 import * as echarts from "echarts/core";
-import { LineChart } from "echarts/charts";
-import { GridComponent, TooltipComponent, GraphicComponent } from "echarts/components";
+import { LineChart, FunnelChart, BarChart, GraphChart } from "echarts/charts";
+import { GridComponent, TooltipComponent, GraphicComponent, DatasetComponent, LegendComponent } from "echarts/components";
 import { LabelLayout, UniversalTransition } from "echarts/features";
 import { SVGRenderer } from "echarts/renderers";
 import { onMounted } from "vue";
 import { ECOption } from "./chart";
+import uuid from '../utils/uuid'
 
 echarts.use([
 	LineChart,
+	FunnelChart,
+	BarChart,
+	GraphChart,
 	GridComponent,
 	TooltipComponent,
+	DatasetComponent,
+	LegendComponent,
 	LabelLayout,
 	UniversalTransition,
 	SVGRenderer,
@@ -22,7 +28,6 @@ echarts.use([
 ]);
 
 const prop = defineProps<{
-	id: string;
 	options: ECOption;
 }>();
 
@@ -30,7 +35,7 @@ const emit = defineEmits<{
 	(event: "getValue", e): void;
 }>();
 
-const id = prop.id;
+const id = uuid();
 
 let chart;
 let bedounceTimer: number;

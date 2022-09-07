@@ -14,10 +14,15 @@ declare module '@vue/runtime-core' {
     Grid: typeof import('./src/components/grid.vue')['default']
     Header: typeof import('./src/components/base/header.vue')['default']
     Introduce: typeof import('./src/components/home/introduce.vue')['default']
+    KnowledgeGraph: typeof import('./src/components/sugar/knowledgeGraph.vue')['default']
     Music: typeof import('./src/components/base/music.vue')['default']
+    PowerBalance: typeof import('./src/components/sugar/powerBalance.vue')['default']
+    PowerShow: typeof import('./src/components/sugar/powerShow.vue')['default']
     Profile: typeof import('./src/components/home/profile.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SalaryGrowth: typeof import('./src/components/sugar/salaryGrowth.vue')['default']
+    SkillShow: typeof import('./src/components/sugar/skillShow.vue')['default']
     Smoke: typeof import('./src/components/base/smoke.vue')['default']
   }
 }
