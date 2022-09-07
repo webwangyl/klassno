@@ -6,6 +6,7 @@ const dark:Itheme[] = [
     { key: "--color-inside", value: "#fff", label: 'Contrast Color' },
     { key: "--primary-second-title", value: "#e7e8e8", label: 'Title Color' },
     { key: "--primary-text", value: "#d0d0d1", label: 'Primary Text Color' },
+    { key: "--placeholder-color", value: "#808080", label: 'Placeholder Color' },
     { key: "--noice-text", value: "#ffe660", label: 'Noice Color' },
 ];
 

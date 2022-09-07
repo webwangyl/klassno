@@ -6,6 +6,7 @@ const light:Itheme[] = [
     { key: "--color-inside", value: "#131517" },
     { key: "--primary-second-title", value: "#1e1e1e" },
     { key: "--primary-text", value: "#545151" },
+    { key: "--placeholder-color", value: "#c0c0c0" },
     { key: "--noice-text", value: "#005eef" },
 ];
 
