@@ -13,14 +13,12 @@ import { router } from '../router'
 import gsap from 'gsap'
 import Smoke from '@/components/base/smoke.vue'
 const store = useStore()
-let timer = null
 const tl = gsap.timeline()
 const changeAudio = () => {
     store.commit('SET_STATUS', true)
     toHome()
 }
 const toHome = () => {
-    if (timer) clearTimeout(timer)
     router.replace('/home')
 }
 const onenter = (classname: string) => {

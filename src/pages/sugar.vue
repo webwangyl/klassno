@@ -2,7 +2,7 @@
     <div class="sugar-container">
         <SkillShow></SkillShow>
         <PokerCard></PokerCard>
-        <PowerBalance></PowerBalance>
+        <PowerBalance :theme="keyTheme"></PowerBalance>
         <SalaryGrowth></SalaryGrowth>
         <KnowledgeGraph></KnowledgeGraph>
     </div>
@@ -14,7 +14,33 @@ import PowerBalance from '../components/sugar/powerBalance.vue';
 import SalaryGrowth from '../components/sugar/salaryGrowth.vue'
 import KnowledgeGraph from '../components/sugar/knowledgeGraph.vue';
 import PokerCard from '../components/sugar/pokerCard.vue';
+import { IKeyTheme } from '../theme/Itheme';
+import { computed, reactive, watch } from 'vue';
+import { useStore } from '../store';
 
+const keyTheme: IKeyTheme = reactive({
+    colorTheme: '#131517',
+    backgroundBlod: '#333',
+    colorInside: '#fff',
+    primarySecondTitle: '#e7e8e8',
+    primaryText: '#d0d0d1',
+    placeholderColor: '#808080',
+    noiceText: '#ffe660',
+})
+
+const store = useStore()
+
+const theme = computed(() => store.state.theme);
+watch(theme, () => {
+	const app = document.documentElement
+    keyTheme.colorTheme = app.style.getPropertyValue('--color-theme')
+    keyTheme.backgroundBlod = app.style.getPropertyValue('--background-blod')
+    keyTheme.colorInside = app.style.getPropertyValue('--color-inside')
+    keyTheme.primarySecondTitle = app.style.getPropertyValue('--primary-second-title')
+    keyTheme.primaryText = app.style.getPropertyValue('--primary-text')
+    keyTheme.placeholderColor = app.style.getPropertyValue('--placeholder-color')
+    keyTheme.noiceText = app.style.getPropertyValue('--noice-text')
+})
 </script>
 
 <style lang="scss" scoped>
@@ -24,6 +50,6 @@ import PokerCard from '../components/sugar/pokerCard.vue';
     overflow: hidden;
     display: flex;
     flex-wrap: wrap;
-    padding: 12px;
+    // padding: 12px;
 }
 </style>
