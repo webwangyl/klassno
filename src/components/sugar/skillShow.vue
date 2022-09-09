@@ -7,13 +7,22 @@
 <script lang="ts" setup>
 import Chart from '../chart.vue'
 import { ECOption } from '../chart'
+import { IKeyTheme } from '../../theme/Itheme';
+import { reactive, watch } from 'vue';
 
-const options: ECOption = {
+const prop = defineProps<{
+    theme: IKeyTheme
+}>()
+
+const options: ECOption = reactive({
     series: [
         {
             type: 'funnel',
             funnelAlign: 'left',
             sort: 'ascending',
+            label: {
+                color: prop.theme.colorInside
+            },
             width: '40%',
             data: [
                 { value: 20, name: 'node' },
@@ -24,8 +33,11 @@ const options: ECOption = {
             ],
         }
     ],
-}
+})
 
+watch(prop.theme, (nval) => {
+    options.series[0].label.color = nval.colorInside
+})
 </script>
 
 <style scoped>

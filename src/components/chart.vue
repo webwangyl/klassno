@@ -8,10 +8,9 @@ import { LineChart, FunnelChart, BarChart, GraphChart } from "echarts/charts";
 import { GridComponent, TooltipComponent, GraphicComponent, DatasetComponent, LegendComponent } from "echarts/components";
 import { LabelLayout, UniversalTransition } from "echarts/features";
 import { SVGRenderer } from "echarts/renderers";
-import { computed, onMounted, watch } from "vue";
+import { onMounted, watch } from "vue";
 import { ECOption } from "./chart";
 import uuid from '../utils/uuid'
-import { useStore } from "../store";
 
 echarts.use([
 	LineChart,
@@ -36,17 +35,13 @@ const emit = defineEmits<{
 	(event: "getValue", e): void;
 }>();
 
-const store = useStore()
-
 const id = uuid();
 
 let chart;
 let bedounceTimer: number;
 let dbclickTimer: number;
 
-const theme = computed(() => store.state.theme);
-watch(() => prop.options, (nval) => {
-	console.log(nval)
+watch(() => prop.options, () => {
 	init()
 }, { deep: true })
 

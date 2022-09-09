@@ -8,13 +8,14 @@
 import Chart from '../chart.vue';
 import { ECOption } from '../chart'
 import { IKeyTheme } from '../../theme/Itheme'
-import { watch } from 'vue';
+import { reactive, watch } from 'vue';
+import { LegendOption } from 'echarts/types/dist/shared'
 
 const prop = defineProps<{
     theme: IKeyTheme
 }>()
 
-const options: ECOption = {
+const options: ECOption = reactive({
     tooltip: {},
     legend: {
         textStyle: {
@@ -32,11 +33,10 @@ const options: ECOption = {
     xAxis: { type: 'category' },
     yAxis: {},
     series: [{ type: 'bar' }, { type: 'bar' }, { type: 'bar' }],
-}
+})
 
 watch(prop.theme, (nval) => {
-    console.log(nval.colorInside)
-    console.log(options.legend.textStyle.color)
+    (options.legend as LegendOption).textStyle.color = nval.colorInside
 })
 </script>
 

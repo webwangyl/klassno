@@ -1,10 +1,10 @@
 <template>
     <div class="sugar-container">
-        <SkillShow></SkillShow>
+        <SkillShow :theme="keyTheme"></SkillShow>
         <PokerCard></PokerCard>
         <PowerBalance :theme="keyTheme"></PowerBalance>
-        <SalaryGrowth></SalaryGrowth>
-        <KnowledgeGraph></KnowledgeGraph>
+        <SalaryGrowth :theme="keyTheme"></SalaryGrowth>
+        <KnowledgeGraph :theme="keyTheme"></KnowledgeGraph>
     </div>
 </template>
 
