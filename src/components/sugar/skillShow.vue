@@ -42,7 +42,7 @@ watch(prop.theme, (nval) => {
 
 <style scoped>
 .skill-show {
-    width: 400px;
-    height: 200px;
+    width: 100%;
+    height: 100%;
 }
 </style>

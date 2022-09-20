@@ -5,12 +5,18 @@
 <script lang="ts" setup>
 import * as echarts from "echarts/core";
 import { LineChart, FunnelChart, BarChart, GraphChart } from "echarts/charts";
-import { GridComponent, TooltipComponent, GraphicComponent, DatasetComponent, LegendComponent } from "echarts/components";
+import {
+	GridComponent,
+	TooltipComponent,
+	DatasetComponent,
+	LegendComponent,
+} from "echarts/components";
 import { LabelLayout, UniversalTransition } from "echarts/features";
 import { SVGRenderer } from "echarts/renderers";
 import { onMounted, watch } from "vue";
 import { ECOption } from "./chart";
-import uuid from '../utils/uuid'
+import uuid from "../utils/uuid";
+import debounce from "../utils/debounce";
 
 echarts.use([
 	LineChart,
@@ -24,7 +30,6 @@ echarts.use([
 	LabelLayout,
 	UniversalTransition,
 	SVGRenderer,
-	GraphicComponent,
 ]);
 
 const prop = defineProps<{
@@ -41,12 +46,16 @@ let chart;
 let bedounceTimer: number;
 let dbclickTimer: number;
 
-watch(() => prop.options, () => {
-	init()
-}, { deep: true })
+watch(
+	() => prop.options,
+	() => {
+		init();
+	},
+	{ deep: true }
+);
 
 const init = () => {
-	if (chart) chart.dispose()
+	if (chart) chart.dispose();
 	chart = echarts.init(document.getElementById(id) as HTMLElement);
 	chart.setOption(prop.options);
 	if (chart._$handlers && chart._$handlers.click) {
@@ -69,14 +78,13 @@ const init = () => {
 const resize = () => {
 	if (chart) {
 		// 避免疯狂触发echarts重绘
-		if (bedounceTimer) clearTimeout(bedounceTimer);
-		bedounceTimer = window.setTimeout(() => {
+		debounce(
 			chart.resize({
 				animation: {
 					duration: 1000,
 				},
-			});
-		}, 300);
+			})
+		);
 	}
 };
 
