@@ -11,6 +11,7 @@
 	<Profile class="page"></Profile>
 	<Introduce class="page"></Introduce>
 	<Book class="page"></Book>
+	<Timeline class="page"></Timeline>
 	<div class="page last"></div>
 </template>
 
@@ -22,6 +23,7 @@ import { ElProgress } from "element-plus";
 import Profile from '@/components/home/profile.vue';
 import Introduce from '@/components/home/introduce.vue';
 import Book from '@/components/home/book.vue';
+import Timeline from '@/components/home/timeline.vue';
 import { useStore } from "../store";
 
 gsap.registerPlugin(ScrollTrigger);

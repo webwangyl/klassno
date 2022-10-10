@@ -27,6 +27,16 @@ const routes:RouteRecordRaw[] = [
                 name: 'theme',
                 component: () => import('@/pages/theme.vue')
             },
+            {
+                path: '/case',
+                name: 'case',
+                component: () => import('@/pages/case.vue')
+            },
+            {
+                path: '/content',
+                name: 'content',
+                component: () => import('@/pages/content.vue')
+            },
         ],
     },
     {

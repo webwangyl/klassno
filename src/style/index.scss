@@ -112,3 +112,13 @@ body {
         display: none;
     }
 }
+
+.my-tag {
+    height: 24px;
+    line-height: 24px;
+    text-indent: 0;
+}
+
+.my-tag + .my-tag {
+    margin-left: 8px;
+}

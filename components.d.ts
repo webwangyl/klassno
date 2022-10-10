@@ -10,10 +10,12 @@ declare module '@vue/runtime-core' {
     ArrowButton: typeof import('./src/components/base/arrowButton.vue')['default']
     Book: typeof import('./src/components/home/book.vue')['default']
     Chart: typeof import('./src/components/chart.vue')['default']
+    Elsewhere: typeof import('./src/components/blog/elsewhere.vue')['default']
     Grid: typeof import('./src/components/grid.vue')['default']
     Header: typeof import('./src/components/base/header.vue')['default']
     Introduce: typeof import('./src/components/home/introduce.vue')['default']
     KnowledgeGraph: typeof import('./src/components/sugar/knowledgeGraph.vue')['default']
+    MdPreview: typeof import('./src/components/base/mdPreview.vue')['default']
     Music: typeof import('./src/components/base/music.vue')['default']
     PokerCard: typeof import('./src/components/sugar/pokerCard.vue')['default']
     PowerBalance: typeof import('./src/components/sugar/powerBalance.vue')['default']
@@ -23,5 +25,6 @@ declare module '@vue/runtime-core' {
     SalaryGrowth: typeof import('./src/components/sugar/salaryGrowth.vue')['default']
     SkillShow: typeof import('./src/components/sugar/skillShow.vue')['default']
     Smoke: typeof import('./src/components/base/smoke.vue')['default']
+    Timeline: typeof import('./src/components/home/timeline.vue')['default']
   }
 }

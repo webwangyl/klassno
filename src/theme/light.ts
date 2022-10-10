@@ -8,6 +8,8 @@ const light:Itheme[] = [
     { key: "--primary-text", value: "#545151" },
     { key: "--placeholder-color", value: "#c0c0c0" },
     { key: "--noice-text", value: "#005eef" },
+    { key: "--color-background-1", value: "#fff" },
+    { key: "--color-background-2", value: "#ececec" },
 ];
 
 export default light
