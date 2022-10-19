@@ -40,7 +40,7 @@ const keyTheme: IKeyTheme = reactive({
 const p0:number = 1.98 // 1920 / (1080 - 110) 1920分辨率下去掉浏览器工具栏高度保留两位小数
 const w0:number = 1920
 const h0:number = 970
-let zoom = ref<Number>(0)
+let zoom = ref<number>(0)
 
 const computedZoom = () => {
     const h:number = window.innerHeight
@@ -52,7 +52,7 @@ const computedZoom = () => {
     } else {
         zoom.value = h / h0
     }
-    console.log(zoom.value)
+    console.log(document.getElementsByClassName('sugar-container')[0])
 }
 
 computedZoom()

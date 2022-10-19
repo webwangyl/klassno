@@ -1,8 +1,8 @@
 [
     {
-        "title": "路由守卫跳转问题",
-        "time": "2022-09-23",
-        "preview": "路由守卫的next不跳转了？",
+        "title": "el-collapse高度问题",
+        "time": "2022-10-14",
+        "preview": "切换折叠面板时造成外层容器高度撑开",
         "tags": [
             {
                 "name": "Problem",
@@ -11,6 +11,18 @@
             {
                 "name": "Newest",
                 "type": "danger"
+            }
+        ],
+        "filename": "problem-collapse-height"
+    },
+    {
+        "title": "路由守卫跳转问题",
+        "time": "2022-09-23",
+        "preview": "路由守卫的next不跳转了？",
+        "tags": [
+            {
+                "name": "Problem",
+                "type": ""
             }
         ],
         "filename": "problem-router-beforeEach"

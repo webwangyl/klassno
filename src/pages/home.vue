@@ -18,7 +18,7 @@
 <script lang="ts" setup>
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { onMounted, reactive, computed, watchEffect } from "vue";
+import { onMounted, reactive, watchEffect } from "vue";
 import { ElProgress } from "element-plus";
 import Profile from '@/components/home/profile.vue';
 import Introduce from '@/components/home/introduce.vue';
@@ -62,11 +62,12 @@ onMounted(() => {
 });
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .progress {
 	position: fixed;
 	top: 160px;
 	right: 80px;
+	z-index: 199;
 	&:deep(.el-progress-circle__track) {
 		stroke: var(--primary-text);
 		opacity: 0.3;

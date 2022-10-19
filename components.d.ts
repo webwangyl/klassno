@@ -22,6 +22,7 @@ declare module '@vue/runtime-core' {
     Profile: typeof import('./src/components/home/profile.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    RunningBall: typeof import('./src/components/case/RunningBall.vue')['default']
     SalaryGrowth: typeof import('./src/components/sugar/salaryGrowth.vue')['default']
     SkillShow: typeof import('./src/components/sugar/skillShow.vue')['default']
     Smoke: typeof import('./src/components/base/smoke.vue')['default']

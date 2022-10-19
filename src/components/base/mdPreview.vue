@@ -1,10 +1,9 @@
 <template>
-    <v-md-preview v-if="text" :text="text"></v-md-preview>
+    <v-md-editor v-if="text" v-model="text" mode="preview"></v-md-editor>
 </template>
 
 <script lang="ts" setup>
 defineProps<{
     text: string,
 }>()
-
 </script>

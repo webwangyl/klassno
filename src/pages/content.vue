@@ -47,6 +47,7 @@ getContent(filename)
     }
     .blog-content {
         flex: 1;
+        padding-left: 20px;
     }
 }
 </style>

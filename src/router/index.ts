@@ -8,6 +8,16 @@ const routes:RouteRecordRaw[] = [
         component: Welcome
     },
     {
+        path: '/test',
+        name: 'test',
+        component: () => import('@/pages/test.vue')
+    },
+    {
+        path: '/case',
+        name: 'case',
+        component: () => import('@/pages/case.vue')
+    },
+    {
         path: '/',
         name: 'default',
         component: () => import('@/layouts/default.vue'),
@@ -26,11 +36,6 @@ const routes:RouteRecordRaw[] = [
                 path: '/theme',
                 name: 'theme',
                 component: () => import('@/pages/theme.vue')
-            },
-            {
-                path: '/case',
-                name: 'case',
-                component: () => import('@/pages/case.vue')
             },
             {
                 path: '/content',
