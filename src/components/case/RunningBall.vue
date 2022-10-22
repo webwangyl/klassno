@@ -11,7 +11,7 @@ import { onMounted } from "vue";
 let canvas: HTMLCanvasElement;
 let ctx: CanvasRenderingContext2D;
 let w: number;
-let h: number = 300;
+let h: number;
 const m = Math;
 const pi = m.PI;
 const v = m.cos;
@@ -105,7 +105,7 @@ const init = () => {
     setTimeout(() => {
         canvas = document.getElementById("canvas") as HTMLCanvasElement;
         w = canvas.parentElement.offsetWidth;
-        console.log(canvas.parentElement)
+        h = canvas.parentElement.offsetHeight;
         canvas.width = w;
         canvas.height = h;
         ctx = canvas.getContext("2d");

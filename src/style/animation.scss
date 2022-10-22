@@ -1,15 +1,12 @@
 @keyframes breath-light {
     0% {
         opacity: .7;
-        // box-shadow: 0 1px 2px var(--color-inside);
     }
     60% {
         opacity: 1;
-        // box-shadow: 0 1px 30px var(--color-inside);
     }
     100% {
         opacity: 1;
-        // box-shadow: 0 1px 30px var(--color-inside);
     }
 }
 
@@ -78,4 +75,16 @@
 	100% {
 		transform: scale(0);
 	}
+}
+
+@keyframes jelly-box {
+    0% {
+        border-radius: 85% 15% 85% 15% / 15% 85% 15% 85%;
+    }
+    50% {
+        border-radius: 50% 50% 50% 50% / 85% 85% 15% 15%;
+    }
+    100% {
+        border-radius: 85% 15% 85% 15% / 15% 85% 15% 85%;
+    }
 }
