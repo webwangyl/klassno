@@ -77,8 +77,8 @@ onMounted(() => {
         requestAnimationFrame(animate)
     }
     animate()
-    // const controls = new OrbitControls(camera, renderer.domElement)
-    // controls.addEventListener('change', animate)
+    const controls = new OrbitControls(camera, renderer.domElement)
+    controls.addEventListener('change', animate)
 })
 </script>
 

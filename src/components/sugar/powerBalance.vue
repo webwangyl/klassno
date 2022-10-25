@@ -9,7 +9,7 @@ import Chart from '../chart.vue';
 import { ECOption } from '../chart'
 import { IKeyTheme } from '../../theme/Itheme'
 import { reactive, watch } from 'vue';
-import { LegendOption } from 'echarts/types/dist/shared'
+// import { LegendOption } from 'echarts/types/dist/shared'
 
 const prop = defineProps<{
     theme: IKeyTheme
@@ -35,9 +35,9 @@ const options: ECOption = reactive({
     series: [{ type: 'bar' }, { type: 'bar' }, { type: 'bar' }],
 })
 
-watch(prop.theme, (nval) => {
-    (options.legend as LegendOption).textStyle.color = nval.colorInside
-})
+// watch(prop.theme, (nval) => {
+//     (options.legend as LegendOption).textStyle.color = nval.colorInside
+// })
 </script>
 
 <style scoped>

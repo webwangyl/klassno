@@ -4,7 +4,7 @@
 
 <script lang="ts" setup>
 import * as THREE from 'three'
-import three from '../assets/images/three.jpg'
+import three from '../assets/images/node.png'
 import { Material } from 'three'
 import { onMounted } from 'vue';
 
@@ -23,10 +23,21 @@ const TreeNode: INode[] = [
     {
         name: 'asd',
         radius: 60,
-        // x: 10,
-        // y: 100,
-        // z: 20,
-    }
+    },
+    {
+        name: 'fff',
+        radius: 60,
+        x: 200,
+        y: 100,
+        z: -200,
+    },
+    {
+        name: 'fff',
+        radius: 60,
+        x: -200,
+        y: -100,
+        z: -150,
+    },
 ]
 
 onMounted(() => {
@@ -37,7 +48,7 @@ onMounted(() => {
     // 场景、相机、渲染器
     const scene = new THREE.Scene()
     const camera = new THREE.PerspectiveCamera(75, w/h, 1, 1000)
-    camera.position.set(0,0,200)
+    camera.position.set(0, 0, 400)
     camera.lookAt(scene.position)
     const texture = new THREE.TextureLoader().load(three)
     texture.repeat.set(2,1)
@@ -46,10 +57,11 @@ onMounted(() => {
         const wireframe = new THREE.WireframeGeometry(geometrySphere)
         const material = new THREE.MeshLambertMaterial({
           color: 0xffffaf,
-          map: texture,
+        //   map: texture,
         })
-        // const wireframeLine = new THREE.LineSegments(wireframe)
-        // scene.add(wireframeLine)
+        const wireframeLine = new THREE.LineSegments(wireframe)
+        wireframeLine.position.set(el.x || 0, el.y || 0, el.z || 0)
+        scene.add(wireframeLine)
         const geometry = new THREE.SphereGeometry(el.radius)
         const mesh = new THREE.Mesh(geometry, material)
         mesh.position.set(el.x || 0, el.y || 0, el.z || 0)
@@ -64,6 +76,20 @@ onMounted(() => {
     const renderer = new THREE.WebGLRenderer()
     renderer.setSize(w,h)
     el.appendChild(renderer.domElement)
+
+    const raycaster = new THREE.Raycaster()
+    const mouse = new THREE.Vector2()
+
+    window.addEventListener('click', (e) => {
+        mouse.x = e.clientX / renderer.domElement.clientWidth * 2 - 1
+        mouse.y = -(e.clientY / renderer.domElement.clientHeight * 2) + 1
+        raycaster.setFromCamera(mouse, camera)
+        const intersects = raycaster.intersectObjects(scene.children)
+        if (intersects.length) {
+            const { x, y, z } = intersects[0].object.position
+            camera.position.set(x, y, z + 400)
+        }
+    })
 
     const animate = () => {
         renderer.render(scene, camera)
