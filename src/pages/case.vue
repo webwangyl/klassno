@@ -68,7 +68,6 @@ onMounted(() => {
                     activeIndex.value = 0
                 } else {
                     activeIndex.value = Math.round(progress * (caseList.length - 1))
-                    console.log(Math.round(progress * (caseList.length - 1)))
                 }
             })
 		},

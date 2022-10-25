@@ -42,12 +42,22 @@ const routes:RouteRecordRaw[] = [
                 name: 'content',
                 component: () => import('@/pages/content.vue')
             },
+            {
+                path: '/collection',
+                name: 'collection',
+                component: () => import('@/pages/collection.vue')
+            },
         ],
     },
     {
         path: '/sugar',
         name: 'sugar',
         component: () => import('@/pages/sugar.vue')
+    },
+    {
+        path: '/three',
+        name: 'three',
+        component: () => import('@/pages/three.vue')
     },
 ]
 

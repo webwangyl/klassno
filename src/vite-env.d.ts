@@ -1,4 +1,5 @@
 /// <reference types="vite/client" />
+/// <reference path="node_modules/@types/three/src/Three.d.ts" />
 
 declare module '*.vue' {
   import type { DefineComponent } from 'vue'
