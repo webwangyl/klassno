@@ -4,9 +4,11 @@
 
 <script lang="ts" setup>
 import * as THREE from 'three'
+import  { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import three from '../assets/images/node.png'
 import { Material } from 'three'
 import { onMounted } from 'vue';
+import  * as TWEEN from '@tweenjs/tween.js'
 
 export interface INode {
     name: string,
@@ -40,16 +42,104 @@ const TreeNode: INode[] = [
     },
 ]
 
+let camera
+let cameraPosition
+let renderer
+let scene
+let controls
+let _lookAt = {
+    x: 0,
+    y: 0,
+    z: 0
+}
+let preLookAt = JSON.parse(JSON.stringify(_lookAt))
+
+// const setCamera = (dx1, dy1, dz1, dx2, dy2, dz2) => {
+//     camera.position.x = dx1
+//     camera.position.y = dy1
+//     camera.position.z = dz1
+//     camera.lookAt(dx2, dy2, dz2)
+//     renderer.render(scene, camera)
+// }
+
+// const renderScene = () => {
+// 	TWEEN.update();
+// 	orbit.update();
+// 	// 使用requestAnimationFrame函数进行渲染
+// 	requestAnimationFrame(renderScene);
+// 	renderer.render(scene, camera);
+// }
+
+const transformCamera = (source1, target1, source2, target2) => {
+    var tween = new TWEEN.Tween({
+        x1: source1.x,
+        y1: source1.y,
+        z1: source1.z,
+        x2: source2.x,
+        y2: source2.y,
+        zz: source2.z,
+    })
+    tween.to({
+        x1: target1.x,
+        y1: target1.y,
+        z1: target1.z,
+        x2: target2.x,
+        y2: target2.y,
+        zz: target2.z,
+    }, 3000)
+    tween.onUpdate(function () {
+        camera.position.x = this.x1
+        camera.position.y = this.y1
+        camera.position.z = this.z1
+        controls.target.x = this.x2
+        controls.target.y = this.y2
+        controls.target.z = this.z2
+        controls.update()
+    })
+    tween.easing(TWEEN.Easing.Cubic.InOut)
+    tween.start()
+    // console.log(tween)
+    // const dx1 = (target1.x - source1.x) / (60 * 3)
+    // const dy1 = (target1.y - source1.y) / (60 * 3)
+    // const dz1 = (target1.z - source1.z) / (60 * 3)
+    // const dx2 = (target2.x - source2.x) / (60 * 3)
+    // const dy2 = (target2.y - source2.y) / (60 * 3)
+    // const dz2 = (target2.z - source2.z) / (60 * 3)
+    // let time = 1
+    // const timer = setInterval(() => {
+    //     setCamera(time * dx1, time * dy1, time * dz1, time * dx2, time * dy2, time * dz2)
+    //     time++
+    // }, 16.67)
+    // setTimeout(() => {
+    //     clearInterval(timer)
+    // }, 3000)
+}
+
+const move = (x: number, y: number, z:number) => {
+    const source1 = camera.position // 相机的变幻
+    const source2 = JSON.parse(JSON.stringify(preLookAt)) // 视野方向的变幻
+    const target2 = { x, y, z }
+    const flagx = x > source2.x
+    const flagy = y > source2.y
+    const flagz = z > source2.z
+    const dx = flagx ? x - 400 : x + 400
+    const dy = flagy ? y - 400 : y + 400
+    const dz = flagz ? z - 400 : z + 400
+    const target1 = { x: dx, y: dy, z: dz }
+    transformCamera(source1, target1, source2, target2)
+}
+
 onMounted(() => {
     const el: HTMLElement = document.getElementsByClassName('three')[0] as HTMLElement
     const w = el.offsetWidth
     const h = el.offsetHeight
 
     // 场景、相机、渲染器
-    const scene = new THREE.Scene()
-    const camera = new THREE.PerspectiveCamera(75, w/h, 1, 1000)
+    scene = new THREE.Scene()
+    camera = new THREE.PerspectiveCamera(75, w/h, 1, 1000)
     camera.position.set(0, 0, 400)
-    camera.lookAt(scene.position)
+    cameraPosition = camera.position
+    camera.lookAt(_lookAt.x, _lookAt.y, _lookAt.z)
     const texture = new THREE.TextureLoader().load(three)
     texture.repeat.set(2,1)
     TreeNode.forEach(el => {
@@ -73,7 +163,7 @@ onMounted(() => {
     //环境光
     var ambient = new THREE.AmbientLight(0x666666);
     scene.add(ambient);
-    const renderer = new THREE.WebGLRenderer()
+    renderer = new THREE.WebGLRenderer()
     renderer.setSize(w,h)
     el.appendChild(renderer.domElement)
 
@@ -87,16 +177,16 @@ onMounted(() => {
         const intersects = raycaster.intersectObjects(scene.children)
         if (intersects.length) {
             const { x, y, z } = intersects[0].object.position
-            camera.position.set(x, y, z + 400)
+            move(x, y, z)
         }
     })
 
-    const animate = () => {
-        renderer.render(scene, camera)
-        requestAnimationFrame(animate)
-    }
-    animate()
-    
+    renderer.render(scene, camera)
+    // controls = new OrbitControls(camera, renderer.domElement)
+    // controls.autoRotate = true
+    // controls.addEventListener('change', () => {
+    //     renderer.render(scene, camera)
+    // })
 })
 </script>
 
