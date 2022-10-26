@@ -1,6 +1,8 @@
 <template>
 	<RouterView></RouterView>
 	<div class="fixed-footer">
+        <span class="footer-version">© 2022-2032 ulin.wang 版权所有</span>
+        <a class="footer-version" href="https://beian.miit.gov.cn/" target="_blank">京ICP备2022030309号</a>
 		<div class="i18n-box">
 			<span class="i18n" :class="{ select: language === 'CH' }">CH</span>
 			<span class="i18n" :class="{ select: language === 'EN' }">EN</span>
@@ -83,11 +85,21 @@ onMounted(() => {
 	justify-content: flex-end;
 	width: 100%;
 	height: 30px;
+    align-items: center;
 	z-index: 1000;
 	padding-right: 60px;
 	.root-music {
 		margin: 0 20px;
 	}
+    .footer-version {
+        font-size: 12px;
+        font-weight: 200;
+        color: var(--color-inside);
+        margin: 0 20px;
+    }
+    a.footer-version:hover {
+        color: var(--noice-text);
+    }
 }
 .i18n-box {
 	.theme {
