@@ -15,6 +15,7 @@ export default function(node: INode) {
         const wireframeGeometry = new THREE.SphereGeometry(this.radius + 10, 16, 8)
         const wireframe = new THREE.WireframeGeometry(wireframeGeometry)
         this.mesh.grid = new THREE.LineSegments(wireframe)
+        this.mesh.grid.name = this.name
         this.mesh.grid.position.set(this.x, this.y, this.z)
     }
     const sphereGeometry = new THREE.SphereGeometry(this.radius)
@@ -22,5 +23,6 @@ export default function(node: INode) {
         color: this.color
     })
     this.mesh.node = new THREE.Mesh(sphereGeometry, material)
+    this.mesh.node.name = this.name
     this.mesh.node.position.set(this.x, this.y, this.z)
 }

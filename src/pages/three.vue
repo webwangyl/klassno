@@ -15,29 +15,29 @@ import Node from '../components/threeGraph/Node'
 
 const TreeNode: INode[] = [
     {
-        name: 'asd',
+        name: 'center',
         radius: 30,
         wireframe: true,
     },
     {
         name: 'fff',
         radius: 30,
-        x: 200,
-        y: 100,
+        x: 240,
+        y: 67,
         z: -200,
     },
     {
         name: 'ccc',
         radius: 30,
         x: -200,
-        y: -100,
+        y: -78,
         z: -150,
     },
 ]
 
 const relations: IRelation[] = [
-    { source: 'asd', target: 'fff' },
-    { source: 'asd', target: 'ccc' },
+    { source: 'center', target: 'fff' },
+    { source: 'center', target: 'ccc' },
     { source: 'ccc', target: 'fff' },
 ]
 
@@ -122,12 +122,18 @@ onMounted(() => {
         const intersects = raycaster.intersectObjects(scene.children)
         if (intersects.length) {
             const { x, y, z } = intersects[0].object.position
+            if (intersects[0].object.name === 'center') {
+                gsap.to(camera.position, {
+                    x: 0,y: 0,z: 400,duration: 2,
+                })
+            } else {
+                gsap.to(camera.position, {
+                    x: x * 2,y: y,z: z * 2,duration: 2,
+                })
+            }
             // gsap.to(scene.position, {
             //     x:-x,y:-y,z:-z,duration: 2,
             // })
-            gsap.to(camera.position, {
-                x: x * 2,y: y,z: z * 2,duration: 2,
-            })
         }
     })
 
