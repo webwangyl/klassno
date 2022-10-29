@@ -4,42 +4,41 @@
 
 <script lang="ts" setup>
 import * as THREE from 'three'
+import gsap from 'gsap'
 import  { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import * as dat from 'dat.gui'
 import three from '../assets/images/node.png'
 import { Material } from 'three'
 import { onMounted } from 'vue';
-import  * as TWEEN from '@tweenjs/tween.js'
-
-export interface INode {
-    name: string,
-    radius?: number,
-    material?: Material,
-    id?: string | number,
-    color?: number,
-    x?: number,
-    y?: number,
-    z?: number,
-}
+import { INode, IRelation } from '../components/threeGraph/three'
+import Node from '../components/threeGraph/Node'
 
 const TreeNode: INode[] = [
     {
         name: 'asd',
-        radius: 60,
+        radius: 30,
+        wireframe: true,
     },
     {
         name: 'fff',
-        radius: 60,
+        radius: 30,
         x: 200,
         y: 100,
         z: -200,
     },
     {
-        name: 'fff',
-        radius: 60,
+        name: 'ccc',
+        radius: 30,
         x: -200,
         y: -100,
         z: -150,
     },
+]
+
+const relations: IRelation[] = [
+    { source: 'asd', target: 'fff' },
+    { source: 'asd', target: 'ccc' },
+    { source: 'ccc', target: 'fff' },
 ]
 
 let camera
@@ -52,82 +51,20 @@ let _lookAt = {
     y: 0,
     z: 0
 }
-let preLookAt = JSON.parse(JSON.stringify(_lookAt))
 
-// const setCamera = (dx1, dy1, dz1, dx2, dy2, dz2) => {
-//     camera.position.x = dx1
-//     camera.position.y = dy1
-//     camera.position.z = dz1
-//     camera.lookAt(dx2, dy2, dz2)
-//     renderer.render(scene, camera)
-// }
+let gui = new dat.GUI()
 
-// const renderScene = () => {
-// 	TWEEN.update();
-// 	orbit.update();
-// 	// 使用requestAnimationFrame函数进行渲染
-// 	requestAnimationFrame(renderScene);
-// 	renderer.render(scene, camera);
-// }
-
-const transformCamera = (source1, target1, source2, target2) => {
-    var tween = new TWEEN.Tween({
-        x1: source1.x,
-        y1: source1.y,
-        z1: source1.z,
-        x2: source2.x,
-        y2: source2.y,
-        zz: source2.z,
-    })
-    tween.to({
-        x1: target1.x,
-        y1: target1.y,
-        z1: target1.z,
-        x2: target2.x,
-        y2: target2.y,
-        zz: target2.z,
-    }, 3000)
-    tween.onUpdate(function () {
-        camera.position.x = this.x1
-        camera.position.y = this.y1
-        camera.position.z = this.z1
-        controls.target.x = this.x2
-        controls.target.y = this.y2
-        controls.target.z = this.z2
-        controls.update()
-    })
-    tween.easing(TWEEN.Easing.Cubic.InOut)
-    tween.start()
-    // console.log(tween)
-    // const dx1 = (target1.x - source1.x) / (60 * 3)
-    // const dy1 = (target1.y - source1.y) / (60 * 3)
-    // const dz1 = (target1.z - source1.z) / (60 * 3)
-    // const dx2 = (target2.x - source2.x) / (60 * 3)
-    // const dy2 = (target2.y - source2.y) / (60 * 3)
-    // const dz2 = (target2.z - source2.z) / (60 * 3)
-    // let time = 1
-    // const timer = setInterval(() => {
-    //     setCamera(time * dx1, time * dy1, time * dz1, time * dx2, time * dy2, time * dz2)
-    //     time++
-    // }, 16.67)
-    // setTimeout(() => {
-    //     clearInterval(timer)
-    // }, 3000)
+let control = {
+    speed: 0.01,
+    aoMapIntensity: 0,
+    emissiveIntensity: 0.3,
+    lightMapIntensity: 1,
 }
 
-const move = (x: number, y: number, z:number) => {
-    const source1 = camera.position // 相机的变幻
-    const source2 = JSON.parse(JSON.stringify(preLookAt)) // 视野方向的变幻
-    const target2 = { x, y, z }
-    const flagx = x > source2.x
-    const flagy = y > source2.y
-    const flagz = z > source2.z
-    const dx = flagx ? x - 400 : x + 400
-    const dy = flagy ? y - 400 : y + 400
-    const dz = flagz ? z - 400 : z + 400
-    const target1 = { x: dx, y: dy, z: dz }
-    transformCamera(source1, target1, source2, target2)
-}
+gui.add(control, 'speed', 0.01, 1)
+gui.add(control, 'aoMapIntensity', 0, 1)
+gui.add(control, 'emissiveIntensity', 0, 1)
+gui.add(control, 'lightMapIntensity', 0, 1000)
 
 onMounted(() => {
     const el: HTMLElement = document.getElementsByClassName('three')[0] as HTMLElement
@@ -143,19 +80,27 @@ onMounted(() => {
     const texture = new THREE.TextureLoader().load(three)
     texture.repeat.set(2,1)
     TreeNode.forEach(el => {
-        const geometrySphere = new THREE.SphereGeometry(el.radius + 10, 16, 8) // 网格几何体，对一个几何体以线框形式查看
-        const wireframe = new THREE.WireframeGeometry(geometrySphere)
-        const material = new THREE.MeshLambertMaterial({
-          color: 0xffffaf,
-        //   map: texture,
+        const node = new Node(el)
+        if (el.wireframe) scene.add(node.mesh.grid)
+        scene.add(node.mesh.node)
+    })
+    relations.forEach(relation => {
+        let points = []
+        TreeNode.forEach(el => {
+            if (el.name === relation.source) {
+                points.push(new THREE.Vector3(el.x, el.y, el.z))
+            }
+            if (el.name === relation.target) {
+                points.push(new THREE.Vector3(el.x, el.y, el.z))
+            }
         })
-        const wireframeLine = new THREE.LineSegments(wireframe)
-        wireframeLine.position.set(el.x || 0, el.y || 0, el.z || 0)
-        scene.add(wireframeLine)
-        const geometry = new THREE.SphereGeometry(el.radius)
-        const mesh = new THREE.Mesh(geometry, material)
-        mesh.position.set(el.x || 0, el.y || 0, el.z || 0)
-        scene.add(mesh)
+        const geometry = new THREE.BufferGeometry().setFromPoints(points)
+        const material = new THREE.LineBasicMaterial({
+            color: '#999999',
+            linewidth: 7,
+        })
+        const line = new THREE.Line(geometry, material)
+        scene.add(line)
     })
     var point = new THREE.PointLight(0xffffaf);
     point.position.set(400, 200, 300); //点光源位置
@@ -177,11 +122,41 @@ onMounted(() => {
         const intersects = raycaster.intersectObjects(scene.children)
         if (intersects.length) {
             const { x, y, z } = intersects[0].object.position
-            move(x, y, z)
+            // gsap.to(scene.position, {
+            //     x:-x,y:-y,z:-z,duration: 2,
+            // })
+            gsap.to(camera.position, {
+                x: x * 2,y: y,z: z * 2,duration: 2,
+            })
         }
     })
 
-    renderer.render(scene, camera)
+    function animate() {
+    //     TreeNode.forEach(el => {
+    //     const geometrySphere = new THREE.SphereGeometry(el.radius + 10, 16, 8) // 网格几何体，对一个几何体以线框形式查看
+    //     const wireframe = new THREE.WireframeGeometry(geometrySphere)
+    //     const material = new THREE.MeshLambertMaterial({
+    //       color: '#ffffaf',
+    //       emissive: '#ffffaf',
+    //       emissiveIntensity: control.emissiveIntensity,
+    //       aoMapIntensity: control.aoMapIntensity,
+    //       lightMapIntensity: control.lightMapIntensity
+    //     //   map: texture,
+    //     })
+    //     const wireframeLine = new THREE.LineSegments(wireframe)
+    //     wireframeLine.position.set(el.x || 0, el.y || 0, el.z || 0)
+    //     scene.add(wireframeLine)
+    //     const geometry = new THREE.SphereGeometry(el.radius)
+    //     const mesh = new THREE.Mesh(geometry, material)
+    //     mesh.position.set(el.x || 0, el.y || 0, el.z || 0)
+    //     scene.add(mesh)
+    // })
+        camera.lookAt(0,0,0)
+        // scene.position.x += control.speed
+        renderer.render(scene, camera)
+        requestAnimationFrame(animate)
+    }
+    animate()
     // controls = new OrbitControls(camera, renderer.domElement)
     // controls.autoRotate = true
     // controls.addEventListener('change', () => {

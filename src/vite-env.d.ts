@@ -9,3 +9,4 @@ declare module '*.vue' {
 
 declare module '@kangc/v-md-editor/lib/preview-html'
 declare module '@kangc/v-md-editor/lib/theme/vuepress.js'
+declare module 'dat.gui';
