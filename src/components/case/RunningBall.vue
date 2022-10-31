@@ -1,12 +1,12 @@
 <template>
 	<div class="running-ball">
-		<canvas id="canvas"></canvas>
-        
+		<canvas id="runningball"></canvas>
 	</div>
 </template>
 
 <script lang="ts" setup>
 import { onMounted } from "vue";
+import { throttle } from '../../utils'
 
 let canvas: HTMLCanvasElement;
 let ctx: CanvasRenderingContext2D;
@@ -103,16 +103,16 @@ const r = () => {
 
 const init = () => {
     setTimeout(() => {
-        canvas = document.getElementById("canvas") as HTMLCanvasElement;
+        canvas = document.getElementById("runningball") as HTMLCanvasElement;
         w = canvas.parentElement.offsetWidth;
         h = canvas.parentElement.offsetHeight;
         canvas.width = w;
         canvas.height = h;
         ctx = canvas.getContext("2d");
-        window.addEventListener("mousemove", (e) => {
+        window.addEventListener("mousemove", throttle((e) => {
             ofx = e.offsetX;
             ofy = e.offsetY;
-        });
+        }));
         i();
     }, 500)
 };
@@ -124,5 +124,6 @@ onMounted(init);
 .running-ball {
 	width: 100%;
 	height: 100%;
+    background-color: #ffe660;
 }
 </style>

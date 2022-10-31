@@ -8,7 +8,8 @@
 				class="case-container"
 			>
                 <div class="viewport">
-                    <RunningBall v-if="activeIndex === 0"></RunningBall>
+                    <RunningBall v-if="activeIndex === 0 && index === 0"></RunningBall>
+                    <Thunderstorm v-if="activeIndex === 1 && index === 1"></Thunderstorm>
                 </div>
 			</div>
 		</div>
@@ -26,6 +27,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { onMounted, onUnmounted, ref } from "vue";
 import RunningBall from "../components/case/RunningBall.vue";
+import Thunderstorm from "../components/case/Thunderstorm.vue";
 import { throttle } from '../utils'
 
 interface ICaseItem {
@@ -38,11 +40,11 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 const caseList: ICaseItem[] = [
 	{
 		title: "Running Ball",
-		key: "a1",
+		key: "running-ball",
 	},
 	{
-		title: "Running Ball",
-		key: "s1",
+		title: "Thunderstorm",
+		key: "thunderstorm",
 	},
 	{
 		title: "Running Ball",
@@ -63,7 +65,7 @@ onMounted(() => {
 			end: "+=200%",
 			scrub: true,
 			pin: true,
-            onUpdate: throttle(({ progress }) => {
+            onUpdate: throttle(async ({ progress }) => {
                 if (progress > 1) {
                     activeIndex.value = 0
                 } else {
@@ -112,8 +114,7 @@ onUnmounted(() => ScrollTrigger.killAll());
         .viewport {
             width: 500px;
             height: 473px;
-            background-color: #ffe660;
-            animation: jelly-box 10s infinite linear;
+            // animation: jelly-box 10s infinite linear;
             overflow: hidden;
         }
 	}

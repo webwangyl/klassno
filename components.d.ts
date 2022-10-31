@@ -26,6 +26,7 @@ declare module '@vue/runtime-core' {
     SalaryGrowth: typeof import('./src/components/sugar/salaryGrowth.vue')['default']
     SkillShow: typeof import('./src/components/sugar/skillShow.vue')['default']
     Smoke: typeof import('./src/components/base/smoke.vue')['default']
+    Thunderstorm: typeof import('./src/components/case/Thunderstorm.vue')['default']
     Timeline: typeof import('./src/components/home/timeline.vue')['default']
   }
 }
