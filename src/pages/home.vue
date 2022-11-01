@@ -12,7 +12,15 @@
 	<Introduce class="page"></Introduce>
 	<Book class="page"></Book>
 	<Timeline class="page"></Timeline>
-	<div class="page last"></div>
+	<div class="last">
+        <span class="page-title">About</span>
+        <div class="last-icon">
+            <div v-for="item in iconList" :key="item.label" class="last-container" @click="toLink(item.link)">
+                <img class="icon" :src="item.url" alt="">
+                <span class="info-text">{{ item.label }}</span>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script lang="ts" setup>
@@ -29,6 +37,8 @@ import { useStore } from "../store";
 gsap.registerPlugin(ScrollTrigger);
 
 const store = useStore()
+
+const iconList = store.state.iconList
 const progress = reactive({
 	percentage: 0,
 	progressColor: '',
@@ -40,6 +50,10 @@ watchEffect(() => {
 	const app = document.documentElement
 	progress.progressColor = app.style.getPropertyValue('--noice-text')
 })
+
+const toLink = (link: string) => {
+    window.open(link, '_target')
+}
 
 const init = () => {
 	const sections = gsap.utils.toArray(".page");
@@ -76,5 +90,29 @@ onMounted(() => {
 .page {
 	height: calc(100vh - 120px);
 	padding: 16px;
+}
+.last {
+    .page-title {
+        padding: 60px;
+        text-align: right;
+    }
+    .last-icon {
+        padding: 60px 60px 100px;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        .last-container {
+            height: 20px;
+            display: inline-block;
+            margin-right: 40px;
+        }
+        .icon {
+            height: 25px;
+            margin-right: 10px;
+        }
+        .last-container:hover .info-text{
+            @include hover-text;
+        }
+    }
 }
 </style>
