@@ -1,5 +1,6 @@
 export interface INode {
     name: string,
+    label?: string,
     radius?: number,
     material?: Material,
     id?: string | number,
