@@ -13,7 +13,7 @@
                     </div>
                 </div>
             </div>
-            <Elsewhere></Elsewhere>
+            <Elsewhere @search="search"></Elsewhere>
         </div>
     </div>
 </template>
@@ -24,6 +24,7 @@ import { ElTag } from 'element-plus'
 import { router } from '../router'
 import Elsewhere from '../components/blog/elsewhere.vue';
 import { ItagItem, IBlogItem } from './page'
+import { reactive, ref } from 'vue';
 
 const prop = defineProps<{
     preview?: boolean
@@ -31,7 +32,7 @@ const prop = defineProps<{
 
 const preview = prop.preview || false
 
-const blogList: IBlogItem[] = mdJson as IBlogItem[]
+let blogList = ref<IBlogItem[]>(mdJson as IBlogItem[])
 
 const getContent = async ({ filename }: IBlogItem) => {
     router.push({
@@ -40,6 +41,14 @@ const getContent = async ({ filename }: IBlogItem) => {
             filename: filename
         },
     })
+}
+
+const search = (type: string) => {
+    if (type === 'none') {
+        blogList.value = mdJson as IBlogItem[]
+    } else {
+        blogList.value = (mdJson as IBlogItem[]).filter(el => el.tags.filter(el => el.name === type).length)
+    }
 }
 </script>
 

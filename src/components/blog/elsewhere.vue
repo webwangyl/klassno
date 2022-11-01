@@ -9,15 +9,28 @@
                 <span class="elsewhere-span" :data-url="item.url">{{ item.label }}</span>
             </div>
         </div>
+        <p class="elsewhere">Tag</p>
+        <div class="full-width">
+            <ElTag class="my-tag" :class="{'active': isActive === 'Problem'}" @click="search('Problem')">Problem</ElTag>
+            <ElTag class="my-tag" :class="{'active': isActive === 'Article'}" @click="search('Article')">Article</ElTag>
+        </div>
     </div>
 </template>
 
 <script lang="ts" setup>
+import { ElTag } from 'element-plus'
+import { ref } from 'vue'
 export interface IElsewhereItem {
     src: string,
     label: string,
     url: string,
 }
+
+const emit = defineEmits<{
+    (event: "search", type: string): void;
+}>()
+
+let isActive = ref<string>('none')
 
 const required = (name: string) => {
   return new URL(`/src/assets/images/blog/${name}.png`, import.meta.url).href
@@ -34,6 +47,16 @@ const toElsewhere = (e: MouseEvent) => {
     const url = (e.target as HTMLElement).getAttribute('data-url')
     if (url) {
         window.open(url, '_target')
+    }
+}
+
+const search = (type: string) => {
+    if (isActive.value === type) {
+        isActive.value = 'none'
+        emit('search', 'none')
+    } else {
+        isActive.value = type
+        emit('search', type)
     }
 }
 </script>
@@ -82,6 +105,14 @@ const toElsewhere = (e: MouseEvent) => {
                 font-size: 14px;
             }
         }
+    }
+    .my-tag {
+        cursor: pointer;
+    }
+    .my-tag.active {
+        background-color: var(--noice-text);
+        border: none;
+        color: var(--color-theme);
     }
 }
 </style>

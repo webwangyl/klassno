@@ -49,3 +49,9 @@
 			transparent 100%
 		)
 }
+
+@mixin hover-text {
+    color: var(--noice-text);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+}
