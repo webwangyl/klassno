@@ -43,13 +43,9 @@ const caseList: ICaseItem[] = [
 		key: "running-ball",
 	},
 	{
-		title: "Thunderstorm",
+		title: "Raining",
 		key: "thunderstorm",
-	},
-	{
-		title: "Running Ball",
-		key: "s2",
-	},
+	}
 ];
 
 let activeIndex = ref<number>(0)
@@ -133,6 +129,7 @@ onUnmounted(() => ScrollTrigger.killAll());
             color: #fff;
             line-height: 30px;
             cursor: pointer;
+            text-align: right;
         }
         p.active, p:hover {
             color: #ffe660;

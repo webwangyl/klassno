@@ -1,6 +1,6 @@
 <template>
 	<div class="thunderstorm">
-		<canvas id="thunderstorm-canvas" @mouseenter="stop" @mouseleave="going" @click="addThunder"></canvas>
+		<canvas id="thunderstorm-canvas" @mouseenter="stop" @mouseleave="going"></canvas>
 	</div>
 </template>
 
@@ -58,33 +58,6 @@ class Rain {
     }
 }
 
-class Thunder {
-    x = 0
-    y = 0
-    alpha = 1
-    pathArr = []
-    constructor() {
-        this.x = 0
-        this.y = 0
-        this.draw()
-    }
-    draw() {
-        ctx.beginPath()
-        this.pathArr.forEach((el, index) => {
-
-        })
-        ctx.moveTo(this.x, this.y)
-        ctx.lineTo(100, 75)
-        ctx.strokeStyle = '#ffe660'
-        ctx.stroke()
-    }
-}
-
-const addThunder = () => {
-    new Thunder()
-}
-
-
 const going = () => {
     isStop.value = false
     refresh()
@@ -137,9 +110,7 @@ const init = () => {
         canvas.width = w;
         canvas.height = h;
         ctx = canvas.getContext("2d");
-        // addGroud()
-        // rainning()
-        addThunder()
+        rainning()
     }, 500)
 };
 
