@@ -197,7 +197,8 @@ const resize = () => {
 		cursor: pointer;
 		width: 50px;
 		.logo-content {
-			width: 100%;
+			width: 50px;
+            height: 57px;
 		}
 	}
 	.tab {

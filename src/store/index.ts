@@ -36,7 +36,6 @@ export const store = createStore<State>({
             // { key: 'timeline', label: 'Timeline', url: '/timeline' },
             { key: 'coolcase', label: 'Cool Case', url: '/case' },
             { key: 'collection', label: 'My Collection', url: '/collection' },
-            { key: 'theme', label: 'Custom Theme', url: '/theme' },
             // { key: 'sugar', label: 'The Beauty Of Data', url: '/sugar' },
             { key: 'three', label: 'Three Test', url: '/three' },
         ],

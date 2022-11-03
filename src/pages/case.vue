@@ -10,6 +10,7 @@
                 <div class="viewport">
                     <RunningBall v-if="activeIndex === 0 && index === 0"></RunningBall>
                     <Thunderstorm v-if="activeIndex === 1 && index === 1"></Thunderstorm>
+                    <DomMatrix v-if="activeIndex === 2 && index === 2"></DomMatrix>
                 </div>
 			</div>
 		</div>
@@ -28,6 +29,7 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { onMounted, onUnmounted, ref } from "vue";
 import RunningBall from "../components/case/RunningBall.vue";
 import Thunderstorm from "../components/case/Thunderstorm.vue";
+import DomMatrix from "../components/case/DomMatrix.vue";
 import { throttle } from '../utils'
 
 interface ICaseItem {
@@ -45,6 +47,10 @@ const caseList: ICaseItem[] = [
 	{
 		title: "Raining",
 		key: "thunderstorm",
+	},
+	{
+		title: "Dom Matrix",
+		key: "dommatrix",
 	}
 ];
 
@@ -112,6 +118,7 @@ onUnmounted(() => ScrollTrigger.killAll());
             height: 473px;
             // animation: jelly-box 10s infinite linear;
             overflow: hidden;
+            background-color: #ffe660;
         }
 	}
 	.case-container:nth-child(2n) {

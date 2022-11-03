@@ -33,6 +33,12 @@
 				@click="choose(light, 'light')"
 				>Light</span
 			>
+            <span
+				class="i18n theme"
+				:class="{ select: theme === 'custom' }"
+				@click="toCustom"
+				>Custom</span
+			>
 		</div>
 	</div>
 	<audio id="audio" loop src="/media/minecraft.mp3">
@@ -47,6 +53,7 @@ import light from "./theme/light";
 import { Itheme } from "./theme/Itheme";
 import { useStore } from "./store";
 import Music from "./components/base/music.vue";
+import router from "./router";
 
 const store = useStore();
 let audio: HTMLAudioElement;
@@ -73,6 +80,13 @@ const choose = (themeList: Itheme[], s?: string): void => {
 const status = computed(() => {
 	return store.state.audioStatus;
 });
+
+const toCustom = () => {
+    const currentPath = router.currentRoute?.value?.fullPath;
+    if (currentPath !== '/theme') {
+        router.push('/theme')
+    }
+}
 
 watch(status, (nval) => {
 	if (nval) {

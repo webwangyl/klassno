@@ -70,7 +70,8 @@ const toHref = (web: IWebsite) => {
 <style lang="scss">
 .my-collection {
     height: 100%;
-    padding: 20px 100px;
+    padding: 20px 100px 60px;
+    overflow: auto;
     .cate-list {
         margin-bottom: 40px;
         .cate-title {
