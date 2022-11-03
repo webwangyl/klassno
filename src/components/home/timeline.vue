@@ -55,6 +55,7 @@ const init = () => {
         ease: 'elastic.out(1, 0.3)',
         stagger: 1,
         height: 0,
+        padding: 0,
         duration: .5,
         delay: .4,
     })

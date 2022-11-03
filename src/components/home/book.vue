@@ -77,7 +77,7 @@ const gsapCtrShow = (stepClassname: string) => {
             scroller: '.main',
             start: 'top 50%',
             end: 'bottom 60%',
-            toggleActions: 'restart pause resume reverse',
+            toggleActions: 'restart pause pause pause',
         },
         opacity: 0,
         duration: .1,

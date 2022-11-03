@@ -82,8 +82,8 @@ onMounted(() => {
 	top: 160px;
 	right: 80px;
 	z-index: 199;
-	&:deep(.el-progress-circle__track) {
-		stroke: var(--primary-text);
+	& .el-progress-circle__track {
+		stroke: var(--placeholder-color);
 		opacity: 0.3;
 	}
 }

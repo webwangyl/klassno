@@ -101,9 +101,11 @@ const search = (type: string) => {
                 margin-right: 8px;
             }
             .elsewhere-span {
-                color: var(--primary-text);
                 font-size: 14px;
             }
+        }
+        .elsewhere-list:hover {
+            @include hover-text;
         }
     }
     .my-tag {

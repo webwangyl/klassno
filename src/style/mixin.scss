@@ -55,3 +55,24 @@
     text-decoration: underline;
     text-decoration-thickness: 1px;
 }
+
+/* 弹性盒子 */
+@mixin flex-box(
+    $justifyContent: center,
+    $alignItems: center,
+    $flexDirection: row,
+    $flexWrap: wrap,
+) {
+    display: flex;
+    justify-content: $justifyContent;
+    align-items: $alignItems;
+    flex-direction: $flexDirection;
+    flex-wrap: $flexWrap;
+}
+
+@mixin line-clamp($n: 2) {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $n;
+    overflow: hidden;
+}

@@ -12,27 +12,6 @@ import { onMounted } from 'vue';
 import { INode, IRelation } from '../components/threeGraph/three'
 import Node from '../components/threeGraph/Node'
 
-let v = `
-    varying vec3 vNormal;
-        void main() {
-            //将attributes的normal通过varying赋值给了向量vNormal
-        vNormal = normal;
-            //projectionMatrix是投影变换矩阵 modelViewMatrix是相机坐标系的变换矩阵
-        gl_Position = projectionMatrix * modelViewMatrix * vec4( position.x, position.y, position.z, 1.0 );
-    }
-`;
-let f = `
-    //片元着色器同样需要定义varying vec3 vNormal；
-    varying vec3 vNormal;
-    void main() {
-        //vNormal是一个已经归一化的三维向量
-        float pr = (vNormal.x + 0.9) / 2.0; //pr红色通道值范围为0~1
-        float pg = (vNormal.y + 0.3) / 2.0; //pg绿色通道值范围为0~1
-        float pb = (vNormal.z) / 10.0; //pb蓝色通道值范围为0~1
-        gl_FragColor=vec4(pr, pg, pb, 1.0); //最后设置顶点颜色，点与点之间会自动插值
-    }
-`;
-
 const TreeNode: INode[] = [
     {
         name: 'center',
@@ -49,6 +28,7 @@ const TreeNode: INode[] = [
         x: 240,
         y: 67,
         z: -200,
+        label: 'fff'
     },
     {
         name: 'ccc',
@@ -56,13 +36,13 @@ const TreeNode: INode[] = [
         x: -200,
         y: -78,
         z: -150,
+        label: 'ccc'
     },
 ]
 
 const relations: IRelation[] = [
     { source: 'center', target: 'fff' },
     { source: 'center', target: 'ccc' },
-    { source: 'ccc', target: 'fff' },
 ]
 
 let camera
@@ -75,6 +55,8 @@ let _lookAt = {
     y: 0,
     z: 0
 }
+let w
+let h
 let control = {
     speed: 0.01,
     aoMapIntensity: 0,
@@ -93,8 +75,8 @@ if (import.meta.env.MODE === 'development') {
 
 onMounted(() => {
     const el: HTMLElement = document.getElementsByClassName('three')[0] as HTMLElement
-    const w = el.offsetWidth
-    const h = el.offsetHeight
+    w = el.offsetWidth
+    h = el.offsetHeight
 
     // 场景、相机、渲染器
     scene = new THREE.Scene()
@@ -104,10 +86,13 @@ onMounted(() => {
     camera.lookAt(_lookAt.x, _lookAt.y, _lookAt.z)
     const texture = new THREE.TextureLoader().load(three)
     texture.repeat.set(2,1)
-    TreeNode.forEach(el => {
-        const node = new Node(el)
+    TreeNode.forEach(item => {
+        const node = new Node(item)
         scene.add(node.mesh.node)
         scene.add(node.mesh.point)
+        if (item.label) {
+            // el.appendChild(node.el)
+        }
     })
     relations.forEach(relation => {
         let points = []
@@ -157,33 +142,21 @@ onMounted(() => {
                 })
             }
             // gsap.to(scene.position, {
-            //     x:-x,y:-y,z:-z,duration: 2,
+            //     x:-x*2,y:-y,z:-z*2,duration: 2,
             // })
         }
     })
 
+    window.addEventListener('resize', () => {
+        w = el.offsetWidth
+        h = el.offsetHeight
+        renderer.setSize(w, h)
+        camera.aspect = w / h
+        camera.updateProjectionMatrix()
+    })
+
     function animate() {
-    //     TreeNode.forEach(el => {
-    //     const geometrySphere = new THREE.SphereGeometry(el.radius + 10, 16, 8) // 网格几何体，对一个几何体以线框形式查看
-    //     const wireframe = new THREE.WireframeGeometry(geometrySphere)
-    //     const material = new THREE.MeshLambertMaterial({
-    //       color: '#ffffaf',
-    //       emissive: '#ffffaf',
-    //       emissiveIntensity: control.emissiveIntensity,
-    //       aoMapIntensity: control.aoMapIntensity,
-    //       lightMapIntensity: control.lightMapIntensity
-    //     //   map: texture,
-    //     })
-    //     const wireframeLine = new THREE.LineSegments(wireframe)
-    //     wireframeLine.position.set(el.x || 0, el.y || 0, el.z || 0)
-    //     scene.add(wireframeLine)
-    //     const geometry = new THREE.SphereGeometry(el.radius)
-    //     const mesh = new THREE.Mesh(geometry, material)
-    //     mesh.position.set(el.x || 0, el.y || 0, el.z || 0)
-    //     scene.add(mesh)
-    // })
         camera.lookAt(0,0,0)
-        // scene.position.x += control.speed
         renderer.render(scene, camera)
         requestAnimationFrame(animate)
     }
@@ -199,5 +172,10 @@ onMounted(() => {
 <style lang="scss">
 .three {
     height: 100%;
+    .three-text {
+        position: fixed;
+        z-index: 100;
+        transform: translate(-50%, -50%);
+    }
 }
 </style>

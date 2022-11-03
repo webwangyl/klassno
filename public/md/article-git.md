@@ -38,5 +38,8 @@ git branch -a
 git branch -D dev
 ```
 
+**git提交时是否忽略大小写修改**
 
-
+```
+git config core.ignorecase false
+```

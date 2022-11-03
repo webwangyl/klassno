@@ -1,7 +1,6 @@
 import { INode } from "./three";
+import Text from './Text'
 import * as THREE from "three";
-import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry'
-import { FontLoader } from 'three/examples/jsm/loaders/FontLoader'
 
 export default function (node: INode) {
 	this.name = node.name;
@@ -48,16 +47,18 @@ export default function (node: INode) {
         })
     }
     if (node.label) {
-        const loader = new FontLoader()
-        loader.load('/json/helvetiker_regular.typeface.json', (font) => {
-            const geometry = new TextGeometry( 'Hello three.js!', {
-                font: font,
-                size: 80,
-                height: 40,
-            });
-            this.mesh.label = new THREE.Mesh(geometry)
-            this.mesh.label.position.set(this.x, this.y - this.radius, this.z)
-        })
+        // const loader = new FontLoader()
+        // loader.load('/json/helvetiker_regular.typeface.json', (font) => {
+        //     const geometry = new TextGeometry( 'Hello three.js!', {
+        //         font: font,
+        //         size: 80,
+        //         height: 40,
+        //     });
+        //     this.mesh.label = new THREE.Mesh(geometry)
+        //     this.mesh.label.position.set(this.x, this.y - this.radius, this.z)
+        // })
+        const text = new Text(node.label, { name: this.name, x: this.x, y: this.y })
+        this.el = text.el
     }
     this.mesh.point = new THREE.PointLight(0xffffaf);
     this.mesh.point.position.set(this.x, this.y, this.z); //点光源位置
