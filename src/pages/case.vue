@@ -49,7 +49,7 @@ const caseList: ICaseItem[] = [
 		key: "thunderstorm",
 	},
 	{
-		title: "Dom Matrix",
+		title: "Crazy Click",
 		key: "dommatrix",
 	}
 ];

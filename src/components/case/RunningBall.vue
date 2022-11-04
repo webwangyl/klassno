@@ -102,8 +102,8 @@ const r = () => {
 };
 
 const init = () => {
-    setTimeout(() => {
-        canvas = document.getElementById("runningball") as HTMLCanvasElement;
+    canvas = document.getElementById("runningball") as HTMLCanvasElement;
+    if (canvas) {
         w = canvas.parentElement.offsetWidth;
         h = canvas.parentElement.offsetHeight;
         canvas.width = w;
@@ -114,7 +114,7 @@ const init = () => {
             ofy = e.offsetY;
         }));
         i();
-    }, 500)
+    }
 };
 
 onMounted(init);

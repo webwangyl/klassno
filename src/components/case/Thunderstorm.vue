@@ -13,7 +13,6 @@ let w: number;
 let h: number;
 const m = Math;
 const pi = m.PI;
-const v = m.cos;
 let isStop = ref<boolean>(false)
 const arr = [];
 
@@ -103,15 +102,15 @@ const rainning = () => {
 }
 
 const init = () => {
-    setTimeout(() => {
-        canvas = document.getElementById("thunderstorm-canvas") as HTMLCanvasElement;
+    canvas = document.getElementById("thunderstorm-canvas") as HTMLCanvasElement;
+    if (canvas) {
         w = canvas.parentElement.offsetWidth;
         h = canvas.parentElement.offsetHeight;
         canvas.width = w;
         canvas.height = h;
         ctx = canvas.getContext("2d");
         rainning()
-    }, 500)
+    }
 };
 
 onMounted(init);
