@@ -78,7 +78,7 @@
     {
         "title": "在一个开心的下午，刚完成了微前端改造，意外发生了。。。",
         "time": "2022-09-07",
-        "preview": "刷新时url被编码，手动改成/还是会变成%2F，/assets%2FAssetDetails?id=2c91759dc41fff1bf03adc3be901abdf&tabData",
+        "preview": "刷新时url被编码，手动改成/还是会变成%2F，/assets%2FAssetDetails",
         "tags": [
             {
                 "name": "Problem",

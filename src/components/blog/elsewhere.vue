@@ -67,7 +67,8 @@ const search = (type: string) => {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0 25px;
+    padding: 20px 25px;
+    background-color: var(--background-blod);
     .user-header {
         width: 250px;
         margin-bottom: 12px;
