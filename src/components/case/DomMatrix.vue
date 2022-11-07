@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { onMounted, onBeforeUnmount, ref } from "vue";
 import gsap from "gsap";
 
 interface IAttr {
@@ -17,8 +17,19 @@ interface IAttr {
 	color?: string;
 }
 
+interface IPoint {
+    x: number,
+    y: number,
+}
+
 const arr = [];
 let isTip = ref<boolean>(true)
+
+let sizes = {
+    w: 0,
+    h: 0,
+}
+let interval: number | null = null
 
 class Star {
 	starPoints: DOMPoint[];
@@ -28,6 +39,7 @@ class Star {
 	attr: IAttr;
 	tx: number;
 	ty: number;
+    tl;
 	_node: HTMLElement[];
 	constructor(attr: IAttr) {
 		this.attr = attr;
@@ -42,7 +54,7 @@ class Star {
 		);
 		this.el.classList.add(this.attr.classname);
 		this.parentEl.appendChild(this.el);
-		this.el.setAttribute("stroke", this.attr.color || "#000");
+		this.el.setAttribute("fill", this.attr.color || "#ffe660");
 		this.el.setAttribute(
 			"d",
 			`M ${this.starPoints
@@ -87,9 +99,9 @@ class Star {
 				this.parentEl.appendChild(_star);
 				this._node.push(_star);
 			}
-			let tl = gsap.timeline();
+			this.tl = gsap.timeline();
 			let _this = this;
-			tl.to("." + classname, {
+			this.tl.to("." + classname, {
 				x: this.tx,
 				y: this.ty,
 				ease: "elastic.out(1, 0.3)",
@@ -110,19 +122,35 @@ class Star {
 	}
 }
 
-const render = (e: MouseEvent) => {
+const render = ({ x, y }: IPoint) => {
     isTip.value = false
-	const { offsetX, offsetY } = e;
 	const size = Math.random() * 15 + 7;
 	const star = new Star({
 		classname: "star" + arr.length,
 		points: 10,
-		x: offsetX,
-		y: offsetY,
+		x,
+		y,
 		size,
 	});
 	arr.push(star);
 };
+
+onMounted(() => {
+    sizes.w = window.innerWidth
+    sizes.h = window.innerHeight
+    interval = window.setInterval(() => {
+        render({
+            x: Math.random() * sizes.w,
+            y: Math.random() * sizes.h
+        })
+    }, 1000)
+})
+
+onBeforeUnmount(() => {
+    if (interval) {
+        window.clearInterval(interval)
+    }
+})
 </script>
 
 <style lang="scss">

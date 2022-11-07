@@ -16,12 +16,17 @@ interface IconItem {
     label: string,
 }
 
+interface ICaseItem {
+	title: string;
+	key: string;
+}
 export interface State {
     audioStatus: boolean,
     noices: string[],
     menuList: MenuItem[],
     theme: string,
     iconList: IconItem[],
+    caseList: ICaseItem[],
 }
 
 export const key: InjectionKey<Store<State>> = Symbol()
@@ -46,6 +51,20 @@ export const store = createStore<State>({
             { url: '/src/assets/images/about/gsap.ico', link: 'https://greensock.com/', label: 'GreenSock' },
             { url: '/src/assets/images/about/threejs_white.ico', link: 'https://threejs.org/', label: 'Three.js' },
             { url: '/src/assets/images/about/elementplus.svg', link: 'https://element-plus.gitee.io/zh-CN/', label: 'Element Plus' },
+        ],
+        caseList: [
+            {
+                title: "Running Ball",
+                key: "runningball",
+            },
+            {
+                title: "Raining",
+                key: "thunderstorm",
+            },
+            {
+                title: "Crazy Click",
+                key: "dommatrix",
+            },
         ],
     },
     mutations,

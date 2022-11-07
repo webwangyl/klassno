@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted } from "vue";
+import { onMounted, onBeforeUnmount } from "vue";
 import { throttle } from '../../utils'
 
 let canvas: HTMLCanvasElement;
@@ -19,6 +19,7 @@ let ofx = -1000;
 let ofy = -1000;
 let num = 0;
 const arr = [];
+let timer: number | null = null
 
 class Ball {
 	x = 0;
@@ -80,10 +81,12 @@ class Ball {
 }
 
 const i = (flag?: boolean) => {
-	const ball = new Ball();
-	arr.push(ball);
+    if (arr.length <= 20) {
+        const ball = new Ball();
+        arr.push(ball);
+    }
 	if (!flag) r();
-	setTimeout(() => i(true), m.random() * 1000);
+	timer = window.setTimeout(() => i(true), m.random() * 1000);
 };
 const r = () => {
 	for (let i = 0; i < arr.length; i++) {
@@ -118,12 +121,17 @@ const init = () => {
 };
 
 onMounted(init);
+
+onBeforeUnmount(() => {
+    if (timer) {
+        window.clearTimeout(timer)
+    }
+})
 </script>
 
 <style lang="scss">
 .running-ball {
 	width: 100%;
 	height: 100%;
-    background-color: #ffe660;
 }
 </style>

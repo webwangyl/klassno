@@ -18,6 +18,11 @@ const routes:RouteRecordRaw[] = [
         component: () => import('@/pages/case.vue')
     },
     {
+        path: '/caseShow',
+        name: 'caseShow',
+        component: () => import('@/pages/caseShow.vue')
+    },
+    {
         path: '/',
         name: 'default',
         component: () => import('@/layouts/default.vue'),

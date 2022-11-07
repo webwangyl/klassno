@@ -1,11 +1,11 @@
 <template>
 	<div class="thunderstorm">
-		<canvas id="thunderstorm-canvas" @mouseenter="stop" @mouseleave="going"></canvas>
+		<canvas id="thunderstorm-canvas"></canvas>
 	</div>
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref, onBeforeUnmount } from "vue";
 
 let canvas: HTMLCanvasElement;
 let ctx: CanvasRenderingContext2D;
@@ -13,8 +13,8 @@ let w: number;
 let h: number;
 const m = Math;
 const pi = m.PI;
-let isStop = ref<boolean>(false)
 const arr = [];
+let timer: number | null = null
 
 class Rain {
     x = 0
@@ -50,27 +50,6 @@ class Rain {
         this.dy = Math.max(this.ay + this.dy, 6)
         this.y += this.dy
     }
-    stop() {
-        this.radiusX = this.raw.radiusX
-        this.radiusY = this.raw.radiusY
-        this.dy = this.raw.dy
-    }
-}
-
-const going = () => {
-    isStop.value = false
-    refresh()
-}
-
-const stop = () => {
-    isStop.value = true
-    arr.forEach(el => {
-        el.stop()
-    })
-    ctx.clearRect(0, 0, w, h)
-    arr.forEach(el => {
-        el.draw()
-    })
 }
 
 const refresh = () => {
@@ -85,15 +64,13 @@ const refresh = () => {
     arr.forEach(el => {
         el.draw()
     })
-    if (!isStop.value) {
-        requestAnimationFrame(refresh);
-    }
+    requestAnimationFrame(refresh);
 }
 
 const add = () => {
     const rain = new Rain()
     arr.push(rain)
-    setTimeout(add, 40)
+    timer = window.setTimeout(add, 40)
 }
 
 const rainning = () => {
@@ -114,12 +91,17 @@ const init = () => {
 };
 
 onMounted(init);
+
+onBeforeUnmount(() => {
+    if (timer) {
+        window.clearTimeout(timer)
+    }
+})
 </script>
 
 <style lang="scss">
 .thunderstorm {
 	width: 100%;
 	height: 100%;
-    background-color: rgb(32, 97, 123);
 }
 </style>

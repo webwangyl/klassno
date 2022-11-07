@@ -1,95 +1,87 @@
 <template>
 	<div class="case">
 		<div class="my-container">
-			<div
+            <RunningBall
+                v-if="activeIndex === 0"
+            ></RunningBall>
+            <Thunderstorm
+                v-if="activeIndex === 1"
+            ></Thunderstorm>
+            <DomMatrix
+                v-if="activeIndex === 2"
+            ></DomMatrix>
+		</div>
+		<div class="horbar">
+			<p
 				v-for="(item, index) in caseList"
 				:key="item.key"
-				:id="item.key"
-				class="case-container"
+				@mouseenter="handleMouseEnter(index)"
+                @click="handleClick(item, index)"
 			>
-                <div class="viewport">
-                    <RunningBall v-if="activeIndex === 0 && index === 0"></RunningBall>
-                    <Thunderstorm v-if="activeIndex === 1 && index === 1"></Thunderstorm>
-                    <DomMatrix v-if="activeIndex === 2 && index === 2"></DomMatrix>
-                </div>
-			</div>
-		</div>
-		<div class="nav-list">
-			<nav v-for="(item, index) in caseList" :key="item.key">
-				<p :class="{ 'active': index === activeIndex }">{{ item.title }}</p>
-			</nav>
+                {{ index + 1 }}
+			</p>
 		</div>
 	</div>
 </template>
 
 <script lang="ts" setup>
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { onMounted, onUnmounted, ref } from "vue";
 import RunningBall from "../components/case/RunningBall.vue";
 import Thunderstorm from "../components/case/Thunderstorm.vue";
 import DomMatrix from "../components/case/DomMatrix.vue";
-import { throttle } from '../utils'
+import { throttle } from "../utils";
+import { router } from '../router'
+import { useStore } from '../store'
 
 interface ICaseItem {
 	title: string;
 	key: string;
 }
 
-gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+const store = useStore()
 
-const caseList: ICaseItem[] = [
-	{
-		title: "Running Ball",
-		key: "running-ball",
-	},
-	{
-		title: "Raining",
-		key: "thunderstorm",
-	},
-	{
-		title: "Crazy Click",
-		key: "dommatrix",
-	}
-];
+const caseList = store.state.caseList
 
-let activeIndex = ref<number>(0)
+for (let i = 0; i < 30; i++) {
+    caseList.push({
+        title: i + '',
+        key: i + '',
+    })
+}
+
+let activeIndex = ref<number>(0);
+
+const handleMouseEnter = (index: number) => {
+    activeIndex.value = index
+}
+
+const handleClick = (item: ICaseItem, index: number) => {
+    if (isNaN(Number(item.key))) {
+        router.push({
+            path: 'caseShow',
+            query: {
+                key: item.key,
+                index,
+            },
+        })
+    }
+}
 
 onMounted(() => {
-	gsap.to(".case-container:not(:last-child)", {
-		yPercent: -100,
-		ease: "none",
-		stagger: 0.5,
-		scrollTrigger: {
-			trigger: ".my-container",
-			start: "top top",
-			end: "+=200%",
-			scrub: true,
-			pin: true,
-            onUpdate: throttle(async ({ progress }) => {
-                if (progress > 1) {
-                    activeIndex.value = 0
-                } else {
-                    activeIndex.value = Math.round(progress * (caseList.length - 1))
-                }
-            })
-		},
-	});
-	gsap.set(".case-container", {
-		zIndex: (i, target, targets) => targets.length - i,
-	});
-    const nav: HTMLElement[] = gsap.utils.toArray('nav p')
-    nav.forEach((el, index) => {
-        el.addEventListener('click', () => {
-            const section = document.getElementById(caseList[index].key)
-            gsap.to(window, {
-                scrollTo: section.scrollHeight * index,
-            })
-        })
-    })
+	const h = window.innerWidth;
+	const horbar = document.querySelector(".horbar") as HTMLElement;
+	window.addEventListener(
+		"mousemove",
+		throttle((e: MouseEvent) => {
+			const { clientX } = e;
+			const i = -((clientX * horbar.scrollWidth) / h - h / 2);
+			horbar.style.transform = `translateX(${i}px)`;
+		})
+	);
 });
-onUnmounted(() => ScrollTrigger.killAll());
+onUnmounted(() => {
+
+});
 </script>
 
 <style lang="scss">
@@ -97,54 +89,31 @@ onUnmounted(() => ScrollTrigger.killAll());
 	width: 100%;
 	height: 100%;
 	background-color: var(--color-theme);
+	position: relative;
+	.horbar {
+		position: absolute;
+		top: 50%;
+		display: flex;
+        height: 40px;
+        align-items: center;
+		p {
+			width: 100px;
+			text-align: center;
+			cursor: pointer;
+            font-size: 18px;
+		}
+		p:hover {
+			font-size: 28px;
+			color: var(--noice-text);
+            text-shadow: 0 0 10px var(--noice-text);
+		}
+	}
 	.my-container {
 		height: 100%;
 		overflow: hidden;
 		position: absolute;
 		width: 100%;
+        opacity: .3;
 	}
-	.case-container {
-		@include circle-image;
-
-		width: 100%;
-		height: 100%;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		position: absolute;
-		background-color: #131517;
-        .viewport {
-            width: 500px;
-            height: 473px;
-            // animation: jelly-box 10s infinite linear;
-            overflow: hidden;
-            background-color: #ffe660;
-        }
-	}
-	.case-container:nth-child(2n) {
-		background-color: rgb(117, 117, 117);
-	}
-    .nav-list {
-        position: fixed;
-        right: 20px;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        opacity: .2;
-        p {
-            color: #fff;
-            line-height: 30px;
-            cursor: pointer;
-            text-align: right;
-        }
-        p.active, p:hover {
-            color: #ffe660;
-            text-decoration: underline;
-        }
-    }
-    .nav-list:hover {
-        opacity: .8;
-    }
 }
 </style>
