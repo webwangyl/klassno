@@ -18,7 +18,7 @@
 			@mouseenter="HandleMouseEnter($event, 20, 10)"
 			@mouseleave="HandleMouseLeave"
 		>
-			<span>Enjoy The Silence</span>
+			<span>Click To Menu</span>
 			<i class="knofont knomenu"></i>
 		</div>
 	</div>

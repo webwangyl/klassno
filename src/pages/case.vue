@@ -60,7 +60,6 @@ const handleClick = (item: ICaseItem, index: number) => {
         router.push({
             path: 'caseShow',
             query: {
-                key: item.key,
                 index,
             },
         })

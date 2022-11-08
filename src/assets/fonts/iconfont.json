@@ -6,6 +6,13 @@
   "description": "klassno",
   "glyphs": [
     {
+      "icon_id": "88609",
+      "name": "copy",
+      "font_class": "copy",
+      "unicode": "e706",
+      "unicode_decimal": 59142
+    },
+    {
       "icon_id": "22273061",
       "name": "poker-spade",
       "font_class": "poker-spade",
