@@ -1,10 +1,19 @@
 ## klassno
-cool project but just a blog
+cool project.
+
+## Quick Start
+
+```
+npm install
+npm run dev
+```
 
 ## About
+
 vite/vue3/vuex/vue-router/typescript/gsap/element-plus
 
 ## commit
+
 feat: 新功能
 fix: 修改bug
 docs: 文档
