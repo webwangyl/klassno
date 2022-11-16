@@ -90,6 +90,7 @@ onUnmounted(() => {
 	height: 100%;
 	background-color: var(--color-theme);
 	position: relative;
+    overflow-x: hidden;
 	.horbar {
 		position: absolute;
 		top: 50%;

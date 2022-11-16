@@ -23,6 +23,7 @@ import MenuHeader from '@/components/base/header.vue'
   .main {
     width: 100%;
     overflow: auto;
+    overflow-x: hidden;
   }
   .main::-webkit-scrollbar {
     width: 0;

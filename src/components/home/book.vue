@@ -57,16 +57,21 @@ const tabList: ITabItem[] = [
     { label: 'Problem' },
     { label: 'Article' },
 ]
+let preStepClassName: string
 
 const ProblemList: IBlogItem[] = mdJson.filter(el => el.tags.filter(tag => tag.name === 'Problem').length).slice(0, 3) as IBlogItem[]
 const ArticleList: IBlogItem[] = mdJson.filter(el => el.tags.filter(tag => tag.name === 'Article').length).slice(0, 3) as IBlogItem[]
 
 const tabClick = (index: number, { label }: ITabItem) => {
+    if (currentIndex.value === index) return
     currentIndex.value = index
     gsapCtrShow(`.${label}-firstline`)
 }
 
 const gsapCtrShow = (stepClassname: string) => {
+    gsap.killTweensOf('.gsap-ctr')
+    preStepClassName && gsap.killTweensOf(preStepClassName)
+    preStepClassName = stepClassname
     gsap.to('.gsap-ctr', {
         opacity: 0,
         duration: 0,
