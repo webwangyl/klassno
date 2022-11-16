@@ -25,10 +25,7 @@ const arr = [
     Case1Text, Case2Text, Case3Text
 ]
 
-const { index } = router.currentRoute.value.query
-
-const activeIndex = ref<number>(0)
-activeIndex.value = Number(index)
+let activeIndex = ref<number>(0)
 
 const copy = () => {
     if (!document.getElementById('copyTarget')) {
@@ -47,6 +44,8 @@ const copy = () => {
 }
 
 onMounted(() => {
+    const { index } = router.currentRoute.value.query
+    activeIndex.value = Number(index)
     const el = document.querySelector('.code-inner') as HTMLElement
     el.innerText = arr[activeIndex.value]
     const icon = document.createElement('i')

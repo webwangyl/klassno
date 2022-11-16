@@ -15,6 +15,7 @@
 			<p
 				v-for="(item, index) in caseList"
 				:key="item.key"
+                :class="{'is-active': activeIndex === index}"
 				@mouseenter="handleMouseEnter(index)"
                 @click="handleClick(item, index)"
 			>
@@ -101,7 +102,7 @@ onUnmounted(() => {
 			cursor: pointer;
             font-size: 18px;
 		}
-		p:hover {
+		p:hover, p.is-active {
 			font-size: 28px;
 			color: var(--noice-text);
             text-shadow: 0 0 10px var(--noice-text);

@@ -16,7 +16,7 @@
         <span class="page-title">About</span>
         <div class="last-icon">
             <div v-for="item in iconList" :key="item.label" class="last-container" @click="toLink(item.link)">
-                <img class="icon" :src="item.url" alt="">
+                <img class="icon" :src="required(item.url)" alt="">
                 <span class="info-text">{{ item.label }}</span>
             </div>
         </div>
@@ -50,6 +50,10 @@ watchEffect(() => {
 	const app = document.documentElement
 	progress.progressColor = app.style.getPropertyValue('--noice-text')
 })
+
+const required = (name: string) => {
+  return new URL(name, import.meta.url).href
+}
 
 const toLink = (link: string) => {
     window.open(link, '_target')
