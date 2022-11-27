@@ -123,6 +123,7 @@ const init = () => {
 onMounted(init);
 
 onBeforeUnmount(() => {
+    arr.splice(0, arr.length)
     if (timer) {
         window.clearTimeout(timer)
     }

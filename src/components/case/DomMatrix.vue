@@ -40,9 +40,11 @@ class Star {
 	tx: number;
 	ty: number;
     tl;
+    index;
 	_node: HTMLElement[];
-	constructor(attr: IAttr) {
+	constructor(attr: IAttr, index: number) {
 		this.attr = attr;
+        this.index = index
 		this.tx = (Math.random() - 0.5) * 50;
 		this.ty = (Math.random() - 0.5) * 50;
 		this.deg = 0;
@@ -116,10 +118,19 @@ class Star {
 				onComplete: () => {
 					this.parentEl.removeChild(this.el);
 					this.el = null;
+                    arr.splice(this.index, 1)
 				},
 			});
 		}
 	}
+    unMount() {
+        if (this._node && this._node.length) {
+            this._node.forEach((_) => this.parentEl.removeChild(_));
+        }
+        if (this.el) {
+            this.parentEl.removeChild(this.el);
+        }
+    }
 }
 
 const render = ({ x, y }: IPoint) => {
@@ -131,7 +142,7 @@ const render = ({ x, y }: IPoint) => {
 		x,
 		y,
 		size,
-	});
+	}, arr.length || 0);
 	arr.push(star);
 };
 
@@ -147,6 +158,10 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
+    arr.forEach((star ,index) => {
+        star.unMount()
+        arr.splice(index, 1)
+    })
     if (interval) {
         window.clearInterval(interval)
     }

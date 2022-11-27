@@ -1,6 +1,6 @@
 
 
-##import、export（default）
+## import、export（default）
 
 ```
 // module.js
@@ -103,11 +103,11 @@ console.log(noProtoArr.map) // undefined
 
 ​		如果需要避免这种特殊情况可以使用：
 
-```javascript
+```
 Array.protoType.map.call(noProtoArr, callback)
 ```
 
-##函数参数默认值
+## 函数参数默认值
 
 ```
 function mixArgs(first, second) {

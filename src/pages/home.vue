@@ -52,7 +52,7 @@ watchEffect(() => {
 })
 
 const required = (name: string) => {
-  return new URL(name, import.meta.url).href
+  return new URL(`/src/assets/images/about/${name}`, import.meta.url).href
 }
 
 const toLink = (link: string) => {

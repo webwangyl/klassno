@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import MdPreview from '../components/base/mdPreview.vue';
 import { router } from '../router'
 import Elsewhere from '../components/blog/elsewhere.vue';
@@ -26,7 +26,10 @@ const getContent = async (filename: string) => {
         isError.value = true
     }
 }
-getContent(filename)
+
+onMounted(() => {
+    getContent(filename)
+})
 </script>
 
 <style lang="scss" scoped>

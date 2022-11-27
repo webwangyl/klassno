@@ -46,11 +46,11 @@ export const store = createStore<State>({
         ],
         theme: '',
         iconList: [
-            { url: '/src/assets/images/about/vite.svg', link: 'https://vitejs.cn/', label: 'Vite' },
-            { url: '/src/assets/images/about/vue.svg', link: 'https://vuejs.org/', label: 'Vue' },
-            { url: '/src/assets/images/about/gsap.ico', link: 'https://greensock.com/', label: 'GreenSock' },
-            { url: '/src/assets/images/about/threejs_white.ico', link: 'https://threejs.org/', label: 'Three.js' },
-            { url: '/src/assets/images/about/elementplus.svg', link: 'https://element-plus.gitee.io/zh-CN/', label: 'Element Plus' },
+            { url: 'vite.svg', link: 'https://vitejs.cn/', label: 'Vite' },
+            { url: 'vue.svg', link: 'https://vuejs.org/', label: 'Vue' },
+            { url: 'gsap.ico', link: 'https://greensock.com/', label: 'GreenSock' },
+            { url: 'threejs_white.ico', link: 'https://threejs.org/', label: 'Three.js' },
+            { url: 'elementplus.svg', link: 'https://element-plus.gitee.io/zh-CN/', label: 'Element Plus' },
         ],
         caseList: [
             {
