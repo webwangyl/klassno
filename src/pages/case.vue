@@ -10,6 +10,7 @@
             <DomMatrix
                 v-if="activeIndex === 2"
             ></DomMatrix>
+            <FuncCurve v-if="activeIndex === 3"></FuncCurve>
 		</div>
 		<div class="horbar">
 			<p
@@ -30,6 +31,7 @@ import { onMounted, onUnmounted, ref } from "vue";
 import RunningBall from "../components/case/RunningBall.vue";
 import Thunderstorm from "../components/case/Thunderstorm.vue";
 import DomMatrix from "../components/case/DomMatrix.vue";
+import FuncCurve from "../components/case/FuncCurve.vue";
 import { throttle } from "../utils";
 import { router } from '../router'
 import { useStore } from '../store'

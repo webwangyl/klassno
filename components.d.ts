@@ -12,6 +12,7 @@ declare module '@vue/runtime-core' {
     Chart: typeof import('./src/components/chart.vue')['default']
     DomMatrix: typeof import('./src/components/case/DomMatrix.vue')['default']
     Elsewhere: typeof import('./src/components/blog/elsewhere.vue')['default']
+    FuncCurve: typeof import('./src/components/case/FuncCurve.vue')['default']
     Grid: typeof import('./src/components/grid.vue')['default']
     Header: typeof import('./src/components/base/header.vue')['default']
     Introduce: typeof import('./src/components/home/introduce.vue')['default']

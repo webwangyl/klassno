@@ -7,7 +7,7 @@ const vBreakup:Directive<HTMLElement> = {
         let num = 1
         let classname = ''
         if (binding.value) {
-            num = binding.value.num
+            num = binding.value.num || 1
             classname = binding.value.classname
         }
         const len = el.innerText.length
