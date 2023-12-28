@@ -14,6 +14,13 @@ body {
     background-color: var(--color-theme);
 }
 
+.pos-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
 .noice-text {
     // 全局提示文字样式
     color: var(--noice-text);

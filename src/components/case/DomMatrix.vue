@@ -23,7 +23,7 @@ interface IPoint {
 }
 
 const arr = [];
-let isTip = ref<boolean>(true)
+let isTip = ref(true)
 
 let sizes = {
     w: 0,
@@ -110,7 +110,7 @@ class Star {
 				duration: 2,
 				stagger: 0.2,
 				onComplete: () => {
-					this._node.forEach((_) => _this.parentEl.removeChild(_));
+					this._node.forEach((_) => _ && _this.parentEl.removeChild(_));
 				},
 			}).to("." + classname, {
 				opacity: 0,
@@ -124,6 +124,10 @@ class Star {
 		}
 	}
     unMount() {
+		if (this.tl) {
+			this.tl.kill()
+			this.tl = null
+		}
         if (this._node && this._node.length) {
             this._node.forEach((_) => this.parentEl.removeChild(_));
         }

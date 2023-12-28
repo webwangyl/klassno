@@ -3,6 +3,7 @@ import { Directive } from 'vue'
 interface IInterval extends HTMLElement{
     __vueSetInterval__: number;
     __elementObserve__: ResizeObserver;
+    __initLock__: boolean;
 }
 
 const vResize:Directive<IInterval> = {
@@ -11,9 +12,13 @@ const vResize:Directive<IInterval> = {
         // el为绑定的元素，binding为绑定给指令的对象
         let width = ''
         let height = ''
+        el.__initLock__ = false
         if (window.ResizeObserver) {
             el.__elementObserve__ = new ResizeObserver(() => {
-                binding.value()
+                if (el.__initLock__) {
+                    binding.value()
+                    el.__initLock__ = true
+                }
             })
             el.__elementObserve__.observe(el)
         } else {

@@ -1,8 +1,8 @@
 [
     {
-        "title": "浅析vue源码",
-        "time": "2022-11-16",
-        "preview": "当引入Vue的时候，Vue都做了哪些事，他们是做什么的，浅浅的分析一下",
+        "title": "vue响应式原理的核心类",
+        "time": "2022-12-29",
+        "preview": "Observer/Dep/Watcher",
         "tags": [
             {
                 "name": "Article",
@@ -11,6 +11,18 @@
             {
                 "name": "Newest",
                 "type": "danger"
+            }
+        ],
+        "filename": "article-vue-reactive"
+    },
+    {
+        "title": "浅析vue源码",
+        "time": "2022-11-16",
+        "preview": "当引入Vue的时候，Vue都做了哪些事，他们是做什么的，浅浅的分析一下",
+        "tags": [
+            {
+                "name": "Article",
+                "type": ""
             }
         ],
         "filename": "article-vue-init"

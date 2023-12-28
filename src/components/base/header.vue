@@ -24,6 +24,7 @@
 	</div>
 	<div class="menu">
 		<div class="menu-container" v-show="menuShow">
+			<StarNight class="menu-star"></StarNight>
 			<div class="header">
 				<div
 					class="logo"
@@ -71,13 +72,14 @@ import { onMounted, ref } from "vue";
 import router from "../../router";
 import { useStore } from "../../store";
 import useGridTransform, { GridTransform } from "../../hooks/useGridTransform";
+import StarNight from "../case/StarNight.vue";
 
 const store = useStore();
 let timer: number;
 
 const menuList = store.state.menuList;
 
-let menuShow = ref(false);
+const menuShow = ref(false);
 const menuLine = gsap.timeline();
 let letterLine;
 
@@ -240,6 +242,12 @@ const resize = () => {
 	background-color: var(--color-theme);
 	.menu-container {
 		height: 100%;
+		.menu-star {
+			position: absolute;
+			z-index: -1;
+			height: 100%;
+			width: 100%;
+		}
 		.menu-list {
 			display: flex;
 			height: calc(100% - 120px);

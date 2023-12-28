@@ -1,5 +1,5 @@
 <template>
-    <div class="book">
+    <div id="book" class="book">
         <div class="some-this">
             <div class="tab-header">
                 <div v-for="(item, index) in tabList" @click="tabClick(index, item)" class="tab-item" :class="{ 'is-current': currentIndex === index }">{{ item.label }}</div>
@@ -148,6 +148,14 @@ div.book {
     align-items: center;
     justify-content: center;
     height: 600px;
+    .dom-matrix {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: -1;
+    }
     .some-this {
         width: 600px;
         height: 400px;

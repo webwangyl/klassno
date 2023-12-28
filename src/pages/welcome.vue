@@ -1,7 +1,7 @@
 <template>
     <div class="welcome">
         <Smoke class="smoke">
-            <p class="welcome-text" @mouseenter="onenter('.welcome-text')" @mouseleave="onleave('.welcome-text')" @click="changeAudio">开启沉浸式体验</p>
+            <p class="welcome-text" @mouseenter="onenter('.welcome-text')" @mouseleave="onleave('.welcome-text')" @click="changeAudio">点击继续</p>
         </Smoke>
     </div>
 </template>

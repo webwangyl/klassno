@@ -7,6 +7,19 @@
             <Case1 v-if="activeIndex === 0"></Case1>
             <Case2 v-if="activeIndex === 1"></Case2>
             <Case3 v-if="activeIndex === 2"></Case3>
+            <div v-if="activeIndex === 3" class="pos-center">
+                <div style="width: 300px;height: 500px;">
+                    <Case4 v-if="activeIndex === 3"></Case4>
+                </div>
+            </div>
+            <div v-if="activeIndex === 4" class="pos-center">
+                <div style="width: 600px;height: 250px">
+                    <Case5 v-if="activeIndex === 4"></Case5>
+                </div>
+            </div>
+            <Case6 v-if="activeIndex === 5"></Case6>
+            <Case7 v-if="activeIndex === 6"></Case7>
+            <Case8 v-if="activeIndex === 7"></Case8>
         </div>
     </div>
 </template>
@@ -20,9 +33,19 @@ import Case2Text from '@/components/case/Thunderstorm.vue?raw'
 import Case2 from '@/components/case/Thunderstorm.vue'
 import Case3Text from '@/components/case/DomMatrix.vue?raw'
 import Case3 from '@/components/case/DomMatrix.vue'
+import Case4Text from '@/components/case/MagicCard.vue?raw'
+import Case4 from '@/components/case/MagicCard.vue'
+import Case5Text from '@/components/case/VolumeSound.vue?raw'
+import Case5 from '@/components/case/VolumeSound.vue'
+import Case6Text from '@/components/case/StarNight.vue?raw'
+import Case6 from '@/components/case/StarNight.vue'
+import Case7Text from '@/components/case/MutiLayer.vue?raw'
+import Case7 from '@/components/case/MutiLayer.vue'
+import Case8Text from '@/components/case/LeafWind.vue?raw'
+import Case8 from '@/components/case/LeafWind.vue'
 
 const arr = [
-    Case1Text, Case2Text, Case3Text
+    Case1Text, Case2Text, Case3Text, Case4Text, Case5Text, Case6Text, Case7Text, Case8Text
 ]
 
 let activeIndex = ref<number>(0)
@@ -67,6 +90,7 @@ onMounted(() => {
         padding: 40px;
         height: 100%;
         position: relative;
+        flex-shrink: 0;
         .code-inner {
             height: 100%;
             overflow: auto;
@@ -74,6 +98,7 @@ onMounted(() => {
             padding: 20px;
             cursor: pointer;
             text-indent: 0;
+            white-space: break-spaces;
             .copy {
                 position: absolute;
                 top: 60px;

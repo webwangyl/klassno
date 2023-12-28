@@ -55,15 +55,35 @@ export const store = createStore<State>({
         caseList: [
             {
                 title: "Running Ball",
-                key: "runningball",
+                key: "RunningBall",
             },
             {
                 title: "Raining",
-                key: "thunderstorm",
+                key: "Thunderstorm",
             },
             {
                 title: "Crazy Click",
-                key: "dommatrix",
+                key: "DomMatrix",
+            },
+            {
+                title: "Magic Card",
+                key: 'MagicCard',
+            },
+            {
+                title: "Volume Sound",
+                key: 'VolumeSound',
+            },
+            {
+                title: "Star Night",
+                key: 'StarNight'
+            },
+            {
+                title: "Muti Layer",
+                key: 'MutiLayer'
+            },
+            {
+                title: "Leaf Wind",
+                key: 'LeafWind'
             },
         ],
     },

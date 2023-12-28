@@ -1,23 +1,14 @@
 <template>
 	<div class="case">
 		<div class="my-container">
-            <RunningBall
-                v-if="activeIndex === 0"
-            ></RunningBall>
-            <Thunderstorm
-                v-if="activeIndex === 1"
-            ></Thunderstorm>
-            <DomMatrix
-                v-if="activeIndex === 2"
-            ></DomMatrix>
-            <FuncCurve v-if="activeIndex === 3"></FuncCurve>
+			<component :is="componentMap[activeKey]"></component>
 		</div>
 		<div class="horbar">
 			<p
 				v-for="(item, index) in caseList"
 				:key="item.key"
-                :class="{'is-active': activeIndex === index}"
-				@mouseenter="handleMouseEnter(index)"
+                :class="{'is-active': activeKey === item.key}"
+				@mouseenter="handleMouseEnter(item, index)"
                 @click="handleClick(item, index)"
 			>
                 {{ index + 1 }}
@@ -27,11 +18,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, onUnmounted, ref } from "vue";
-import RunningBall from "../components/case/RunningBall.vue";
-import Thunderstorm from "../components/case/Thunderstorm.vue";
-import DomMatrix from "../components/case/DomMatrix.vue";
-import FuncCurve from "../components/case/FuncCurve.vue";
+import { onMounted, onUnmounted, ref, defineAsyncComponent } from "vue";
 import { throttle } from "../utils";
 import { router } from '../router'
 import { useStore } from '../store'
@@ -45,17 +32,32 @@ const store = useStore()
 
 const caseList = store.state.caseList
 
-for (let i = 0; i < 30; i++) {
-    caseList.push({
-        title: i + '',
-        key: i + '',
-    })
+const componentMap = {
+	RunningBall: defineAsyncComponent(() => import('../components/case/RunningBall.vue')),
+	Thunderstorm: defineAsyncComponent(() => import('../components/case/Thunderstorm.vue')),
+	DomMatrix: defineAsyncComponent(() => import('../components/case/DomMatrix.vue')),
+	MagicCard: defineAsyncComponent(() => import('../components/case/MagicCard.vue')),
+	VolumeSound: defineAsyncComponent(() => import('../components/case/VolumeSound.vue')),
+	StarNight: defineAsyncComponent(() => import('../components/case/StarNight.vue')),
+	MutiLayer: defineAsyncComponent(() => import('../components/case/MutiLayer.vue')),
+	LeafWind: defineAsyncComponent(() => import('../components/case/LeafWind.vue'))
 }
 
-let activeIndex = ref<number>(0);
+if (caseList.length < 30) {
+	for (let i = 0; i < 30; i++) {
+		caseList.push({
+				title: i + '',
+				key: i + '',
+		})
+	}
+}
 
-const handleMouseEnter = (index: number) => {
-    activeIndex.value = index
+let activeKey = ref<string>('RunningBall');
+
+const handleMouseEnter = async (item: ICaseItem, index: number) => {
+	if (isNaN(Number(item.key))) {
+    activeKey.value = item.key
+	}
 }
 
 const handleClick = (item: ICaseItem, index: number) => {

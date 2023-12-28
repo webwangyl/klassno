@@ -8,9 +8,10 @@ import gsap from 'gsap'
 import  { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import * as dat from 'dat.gui'
 import three from '../assets/images/node.png'
-import { onMounted } from 'vue';
+import { onMounted, watchEffect } from 'vue';
 import { INode, IRelation } from '../components/threeGraph/three'
 import Node from '../components/threeGraph/Node'
+import { useStore } from "../store";
 
 const TreeNode: INode[] = [
     {
@@ -45,6 +46,8 @@ const relations: IRelation[] = [
     { source: 'center', target: 'ccc' },
 ]
 
+const store = useStore()
+
 let camera
 let cameraPosition
 let renderer
@@ -57,6 +60,7 @@ let _lookAt = {
 }
 let w
 let h
+let dbclickTimer = 0
 let control = {
     speed: 0.01,
     aoMapIntensity: 0,
@@ -71,15 +75,26 @@ if (import.meta.env.MODE === 'development') {
     // gui.add(control, 'lightMapIntensity', 0, 1000)
 }
 
+let theme: string;
+watchEffect(() => {
+	theme = store.state.theme
+	const app = document.documentElement
+    if (scene) {
+        scene.background = new THREE.Color(app.style.getPropertyValue('--color-theme'))
+    }
+})
+
 
 
 onMounted(() => {
+    const app = document.documentElement
     const el: HTMLElement = document.getElementsByClassName('three')[0] as HTMLElement
     w = el.offsetWidth
     h = el.offsetHeight
 
     // 场景、相机、渲染器
     scene = new THREE.Scene()
+    scene.background = new THREE.Color(app.style.getPropertyValue('--color-theme'))
     camera = new THREE.PerspectiveCamera(75, w/h, 1, 1000)
     camera.position.set(0, 0, 400)
     cameraPosition = camera.position
@@ -126,24 +141,46 @@ onMounted(() => {
     const mouse = new THREE.Vector2()
 
     window.addEventListener('click', (e) => {
+        if (dbclickTimer) {
+			clearTimeout(dbclickTimer);
+			dbclickTimer = null;
+			return;
+		}
+		dbclickTimer = window.setTimeout(() => {
+            mouse.x = e.clientX / renderer.domElement.clientWidth * 2 - 1
+            mouse.y = -(e.clientY / renderer.domElement.clientHeight * 2) + 1
+            raycaster.setFromCamera(mouse, camera)
+            const intersects = raycaster.intersectObjects(scene.children)
+            if (intersects.length) {
+                const { x, y, z } = intersects[0].object.position
+                if (intersects[0].object.name === 'center') {
+                    gsap.to(camera.position, {
+                        x: 0,y: 0,z: 400,duration: 2,
+                    })
+                } else {
+                    gsap.to(camera.position, {
+                        x: x * 2,y: y,z: z * 2,duration: 2,
+                    })
+                }
+            }
+		}, 300);
+    })
+
+    window.addEventListener('dblclick', (e) => {
+        console.log(e)
+        const p = document.createElement('p')
+        p.innerHTML = 'asdasd'
+        p.className = 'append-text'
+        p.style.left = e.offsetX + 'px'
+        p.style.top = e.offsetY + 'px'
+        document.body.appendChild(p)
         mouse.x = e.clientX / renderer.domElement.clientWidth * 2 - 1
         mouse.y = -(e.clientY / renderer.domElement.clientHeight * 2) + 1
         raycaster.setFromCamera(mouse, camera)
         const intersects = raycaster.intersectObjects(scene.children)
         if (intersects.length) {
             const { x, y, z } = intersects[0].object.position
-            if (intersects[0].object.name === 'center') {
-                gsap.to(camera.position, {
-                    x: 0,y: 0,z: 400,duration: 2,
-                })
-            } else {
-                gsap.to(camera.position, {
-                    x: x * 2,y: y,z: z * 2,duration: 2,
-                })
-            }
-            // gsap.to(scene.position, {
-            //     x:-x*2,y:-y,z:-z*2,duration: 2,
-            // })
+            console.log(x, y, mouse)
         }
     })
 
@@ -154,7 +191,7 @@ onMounted(() => {
         camera.aspect = w / h
         camera.updateProjectionMatrix()
     })
-
+    
     function animate() {
         camera.lookAt(0,0,0)
         renderer.render(scene, camera)
@@ -177,5 +214,9 @@ onMounted(() => {
         z-index: 100;
         transform: translate(-50%, -50%);
     }
+}
+.append-text {
+    color: #fff;
+    position: absolute;
 }
 </style>

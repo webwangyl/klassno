@@ -5,8 +5,13 @@
                 <div class="timeline-line"></div>
                 <div class="timeline-dot" :class="{ 'is-last': index === timelineList.length - 1 }">
                     <div class="content-box">
-                        <p class="timeline-info col-text">{{ item.info }}</p>
-                        <p class="timeline-time col-text">{{ item.time }}</p>
+                        <MagicCard>
+                            <template v-slot:hover>
+                                <p class="timeline-info col-text">{{ item.info }}</p>
+                                <p class="timeline-time col-text">{{ item.time }}</p>
+                            </template>
+                            <div class="circle-img"></div>
+                        </MagicCard>
                     </div>
                 </div>
             </div>
@@ -22,6 +27,7 @@
 <script lang="ts" setup>
 import gsap from 'gsap';
 import { onMounted } from 'vue';
+import MagicCard from '../case/MagicCard.vue';
 
 interface ITimelineItem {
     time: string,
@@ -41,7 +47,8 @@ const timelineList: ITimelineItem[] = [
     { time: '20190715', info: '亚信实习' },
     { time: '20200630', info: '大学毕业' },
     { time: '20200715', info: '科蓝' },
-    { time: '20210510', info: '华云安' }
+    { time: '20210510', info: '华云安' },
+    { time: '20230417', info: '海纳AI' }
 ]
 
 const init = () => {
@@ -114,21 +121,31 @@ div.timeline {
                 position: absolute;
                 top: 40px;
                 left: -36px;
-                background-color: var(--placeholder-color);
-                padding: 20px;
-                border-radius: 12px;
-                display: flex;
                 width: 80px;
-                justify-content: space-between;
+                min-height: 300px;
+                .card {
+                    display: flex;
+                    justify-content: space-between;
+                    word-break: break-all;
+                }
+                .circle-img {
+                    @include circle-image;
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 20px;
+                    left: 0;
+                    top: 0;
+                }
                 .col-text {
                     width: 1px;
                     word-break: break-all;
                     white-space: pre-wrap;
                 }
                 .timeline-time {
-                    color: var(--primary-text);
                     font-size: 14px;
                     margin-right: 10px;
+                    font-weight: 200;
                 }
             }
         }
