@@ -1,6 +1,6 @@
-import { IRelation } from './three'
+import { INode, IRelation } from './three'
 import * as THREE from 'three'
 
-export default function () {
-
+export default function (relation: IRelation, nodes: INode) {
+    
 }

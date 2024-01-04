@@ -40,7 +40,7 @@ const componentMap = {
 	VolumeSound: defineAsyncComponent(() => import('../components/case/VolumeSound.vue')),
 	StarNight: defineAsyncComponent(() => import('../components/case/StarNight.vue')),
 	MutiLayer: defineAsyncComponent(() => import('../components/case/MutiLayer.vue')),
-	LeafWind: defineAsyncComponent(() => import('../components/case/LeafWind.vue'))
+	ColorTriangle: defineAsyncComponent(() => import('../components/case/ColorTriangle.vue'))
 }
 
 if (caseList.length < 30) {

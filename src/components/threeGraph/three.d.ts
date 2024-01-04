@@ -14,4 +14,6 @@ export interface INode {
 export interface IRelation {
     source: string,
     target: string,
+    name?: string,
+    color?: number,
 }

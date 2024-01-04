@@ -41,8 +41,8 @@ import Case6Text from '@/components/case/StarNight.vue?raw'
 import Case6 from '@/components/case/StarNight.vue'
 import Case7Text from '@/components/case/MutiLayer.vue?raw'
 import Case7 from '@/components/case/MutiLayer.vue'
-import Case8Text from '@/components/case/LeafWind.vue?raw'
-import Case8 from '@/components/case/LeafWind.vue'
+import Case8Text from '@/components/case/ColorTriangle.vue?raw'
+import Case8 from '@/components/case/ColorTriangle.vue'
 
 const arr = [
     Case1Text, Case2Text, Case3Text, Case4Text, Case5Text, Case6Text, Case7Text, Case8Text

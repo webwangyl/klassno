@@ -8,6 +8,7 @@ export default function (node: INode) {
 	this.x = node.x || 0;
 	this.y = node.y || 0;
 	this.z = node.z || 0;
+    this.label = node.label || '暂无数据'
 	this.radius = node.radius || 20;
 	this.wireframe = node.wireframe || false;
 	this.color = node.color || "#1890ff";
@@ -34,19 +35,19 @@ export default function (node: INode) {
                 gl_FragColor=vec4(pr, 0, pb, 1.0); //最后设置顶点颜色，点与点之间会自动插值
             }
         `;
-        material = new THREE.ShaderMaterial({
-            uniforms: {
-                time: { value: 2.0 },
-                resolution: { value: new THREE.Vector2() },
-            },
-            vertexShader: v,
-            fragmentShader: f,
-        });
-        // material = new THREE.MeshLambertMaterial({
-        //     color: this.color
-        // })
+        // material = new THREE.ShaderMaterial({
+        //     uniforms: {
+        //         time: { value: 2.0 },
+        //         resolution: { value: new THREE.Vector2() },
+        //     },
+        //     vertexShader: v,
+        //     fragmentShader: f,
+        // });
+        material = new THREE.MeshLambertMaterial({
+            color: this.color
+        })
     }
-    // if (node.label) {
+    if (node.label) {
     //     const loader = new THREE.FontLoader()
     //     loader.load('/json/helvetiker_regular.typeface.json', (font) => {
     //         const geometry = new THREE.TextGeometry( 'Hello three.js!', {
@@ -57,13 +58,15 @@ export default function (node: INode) {
     //         this.mesh.label = new THREE.Mesh(geometry)
     //         this.mesh.label.position.set(this.x, this.y - this.radius, this.z)
     //     })
-    //     const text = new Text(node.label, { name: this.name, x: this.x, y: this.y })
-    //     this.el = text.el
-    // }
+        this.text = new Text(node.label, { name: this.name, x: this.x, y: this.y, z: this.z, radius: this.radius }).text
+    }
     this.mesh.point = new THREE.PointLight(0xffffaf);
     this.mesh.point.position.set(this.x, this.y, this.z); //点光源位置
     const sphereGeometry = new THREE.SphereGeometry(this.radius);
     this.mesh.node = new THREE.Mesh(sphereGeometry, material);
     this.mesh.node.name = this.name;
+    this.mesh.node.label = this.label;
+    this.mesh.node.text = this.text;
+    this.mesh.node.radius = this.radius;
     this.mesh.node.position.set(this.x, this.y, this.z);
 }
