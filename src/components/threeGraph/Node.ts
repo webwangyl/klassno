@@ -11,7 +11,7 @@ export default function (node: INode) {
     this.label = node.label || '暂无数据'
 	this.radius = node.radius || 20;
 	this.wireframe = node.wireframe || false;
-	this.color = node.color || "#1890ff";
+	this.color = node.color || "#56ac12";
 	this.mesh = {};
     let material = node.material
     if (!node.material) {
@@ -29,9 +29,9 @@ export default function (node: INode) {
             varying vec3 vNormal;
             void main() {
                 //vNormal是一个已经归一化的三维向量
-                float pr = (vNormal.x + 0.1) / 4.0; //pr红色通道值范围为0~1
+                float pr = (vNormal.x + 0.1) / 2.0; //pr红色通道值范围为0~1
                 float pg = (vNormal.y + 0.1) / 2.0; //pg绿色通道值范围为0~1
-                float pb = (vNormal.z + 0.5) / 1.0; //pb蓝色通道值范围为0~1
+                float pb = (vNormal.z + 0.1) / 2.0; //pb蓝色通道值范围为0~1
                 gl_FragColor=vec4(pr, 0, pb, 1.0); //最后设置顶点颜色，点与点之间会自动插值
             }
         `;
@@ -44,7 +44,8 @@ export default function (node: INode) {
         //     fragmentShader: f,
         // });
         material = new THREE.MeshLambertMaterial({
-            color: this.color
+            color: this.color,
+            wireframe: this.wireframe
         })
     }
     if (node.label) {
@@ -66,6 +67,8 @@ export default function (node: INode) {
     this.mesh.node = new THREE.Mesh(sphereGeometry, material);
     this.mesh.node.name = this.name;
     this.mesh.node.label = this.label;
+    this.mesh.node.progress = node.progress || 0;
+    this.mesh.node.velocity = node.velocity || 0.001;
     this.mesh.node.text = this.text;
     this.mesh.node.radius = this.radius;
     this.mesh.node.position.set(this.x, this.y, this.z);

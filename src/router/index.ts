@@ -54,11 +54,11 @@ const routes:RouteRecordRaw[] = [
             },
         ],
     },
-    {
-        path: '/sugar',
-        name: 'sugar',
-        component: () => import('@/pages/sugar.vue')
-    },
+    // {
+    //     path: '/sugar',
+    //     name: 'sugar',
+    //     component: () => import('@/pages/sugar.vue')
+    // },
     {
         path: '/three',
         name: 'three',

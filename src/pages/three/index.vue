@@ -7,18 +7,26 @@ import { onMounted, watchEffect } from 'vue';
 import * as THREE from 'three'
 import gsap from 'gsap'
 import { nodes, relations, _lookAt, _camera_pos } from './data'
-import { calcAxisAngles, calcNodeDistance, vector3ToScreen, getTransformPosition } from './helpers'
+import { calcAxisAngles, calcNodeDistance, vector3ToScreen, getTransformPosition, createCurve } from './helpers'
+import getEl from './container'
 
 import Node from '../../components/threeGraph/Node'
 import { useStore } from "../../store";
 import { throttle } from '../../utils'
 import useEventListener from '../../hooks/useEventListener'
-// import  { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import  { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 // import * as dat from 'dat.gui'
 // import three from '@/assets/images/node.png'
 // import { INode, IRelation } from '../../components/threeGraph/three'
 
-
+interface MyMesh extends THREE.Mesh {
+    label: string,
+    progress: number,
+    velocity: number,
+    text: string,
+    radius: number,
+    title: string,
+}
 
 const store = useStore()
 let isMove = false;
@@ -28,6 +36,7 @@ let renderer: THREE.WebGLRenderer;
 let scene: THREE.Scene;
 // let controls
 let graphGroup: THREE.Group;
+let pointLight: THREE.PointLight
 
 let w = 0
 let h = 0
@@ -47,9 +56,11 @@ let h = 0
 // }
 
 let theme: string;
-let div: HTMLElement | null = null;
+let globalEl: HTMLElement | HTMLDivElement | null = null;
 const raycaster = new THREE.Raycaster()
 const mouse = new THREE.Vector2()
+
+let curveMap = {};
 
 watchEffect(() => {
 	theme = store.state.theme
@@ -72,11 +83,11 @@ const initWindowsParam = () => {
 const initThreeWorld = (app: HTMLElement, el: HTMLElement) => {
     scene = new THREE.Scene()
     scene.background = new THREE.Color(app.style.getPropertyValue('--color-theme'))
-    camera = new THREE.PerspectiveCamera(45, w / h, 1, 2000)
+    camera = new THREE.PerspectiveCamera(45, w / h, 1, 4000)
     camera.position.set(_camera_pos.x, _camera_pos.y, _camera_pos.z)
     camera.lookAt(_lookAt.x, _lookAt.y, _lookAt.z)
-    const point = new THREE.PointLight(0xffffaf);
-    point.position.set(200, 200, 800)
+    const point = new THREE.PointLight(0xffffff);
+    point.position.set(0, 0, 0);
     scene.add(point)
     const ambient = new THREE.AmbientLight(0x999999);
     scene.add(ambient);
@@ -91,6 +102,11 @@ const loadData = (scene: THREE.Scene) => {
     graphGroup = new THREE.Group()
     nodes.forEach(item => {
         const node = new Node(item)
+        if (item.points) {
+            const object = createCurve(item.points)
+            curveMap[item.name] = object.curve
+            // scene.add(object.line)
+        }
         graphGroup.add(node.mesh.node)
     })
     relations.forEach(relation => {
@@ -115,6 +131,26 @@ const loadData = (scene: THREE.Scene) => {
     scene.add(graphGroup)
 }
 
+const moveOnCurve = (curve: THREE.CatmullRomCurve3, model: MyMesh) => {
+    if (model.progress <= 1 - model.velocity) {
+        const point = curve.getPointAt(model.progress)
+        const pointBox = curve.getPointAt(model.progress + model.velocity)
+        if (point && pointBox) {
+            model.position.set(point.x, point.y, point.z)
+            let targetPos = pointBox
+            let offsetAngle = 0;
+            let matrix = new THREE.Matrix4()
+            matrix.lookAt(model.position, targetPos, model.up)
+            matrix.multiply(new THREE.Matrix4().makeRotationFromEuler(new THREE.Euler(0, offsetAngle, 0, 'ZYX')))
+            let toRot = new THREE.Quaternion().setFromRotationMatrix(matrix)
+            model.quaternion.slerp(toRot, 0.2)
+        }
+        model.progress += model.velocity
+    } else {
+        model.progress = 0
+    }
+}
+
 useEventListener(window, 'click', (e: MouseEvent) => {
     if (isMove) return
     mouse.x = e.clientX / renderer.domElement.clientWidth * 2 - 1
@@ -126,12 +162,15 @@ useEventListener(window, 'click', (e: MouseEvent) => {
             const el = intersects[i];
             const { x, y, z } = el.object.position
             isMove = true
-            if (el.object.name === 'center') {
+            if (el.object.name === '太阳') {
                 gsap.to(graphGroup.position, {
                     x: 0, y: 0, z: 0, duration: 2,
                     onComplete:() => {
                         isMove = false
                     }
+                })
+                gsap.to(pointLight.position, {
+                    z: 0, duration: 2
                 })
                 gsap.to(graphGroup.rotation, {
                     x: 0,y: 0,z: 0,duration: 2,
@@ -142,6 +181,9 @@ useEventListener(window, 'click', (e: MouseEvent) => {
                 gsap.to(graphGroup.position, {
                     z: -d, duration: 2
                 })
+                gsap.to(pointLight.position, {
+                    z: -d, duration: 2
+                })
                 gsap.to(graphGroup.rotation, {
                     x: x < 0 ? -angle.radianX : angle.radianX, y:  y < 0 ? angle.radianY : -angle.radianY, z: z === 0 ? angle.radianZ : 0, duration: 2,
                     onComplete: () => {
@@ -150,9 +192,9 @@ useEventListener(window, 'click', (e: MouseEvent) => {
                 })
             }
             document.body.style.cursor = 'default'
-            if (div) {
-                document.body.removeChild(div)
-                div = null;
+            if (globalEl) {
+                document.body.removeChild(globalEl)
+                globalEl = null;
             }
         }
     }
@@ -176,40 +218,49 @@ useEventListener(window, 'mousemove', throttle((e: MouseEvent) => {
     raycaster.setFromCamera(mouse, camera)
     const intersects = raycaster.intersectObjects(scene.children)
     if (intersects.length) {
-        if (div) return
+        if (globalEl) return
         for (let i = 0; i < intersects.length; i++) {
+            let model = intersects[i].object as MyMesh
             document.body.style.cursor = 'pointer'
-            const { x, y, z } = intersects[i].object.position
+            const { x, y, z } = model.position
             const { left, top } = vector3ToScreen(getTransformPosition(new THREE.Vector3(x, y, z), graphGroup.rotation, calcNodeDistance(new THREE.Vector3(x, y, z))), camera)
-            div = document.createElement('div')
-            div.style.left = left + (intersects[i].object as any).radius + 'px'
-            div.style.top = top + (intersects[i].object as any).radius + 'px'
-            div.className = 'test-global'
-            div.innerHTML = (intersects[i].object as any).label
-            document.body.appendChild(div)
+            globalEl = getEl(model.title, model.label)
+            globalEl.style.left = left + model.radius + 'px'
+            globalEl.style.top = top + model.radius + 'px'
+            globalEl.className = 'test-global'
+            document.body.appendChild(globalEl)
         }
-    } else if (div) {
+    } else if (globalEl) {
         document.body.style.cursor = 'default'
-        document.body.removeChild(div)
-        div = null;
+        document.body.removeChild(globalEl)
+        globalEl = null;
     }
 }))
 
 onMounted(() => {
     const { app, el } = initWindowsParam()
-    const { scene } = initThreeWorld(app, el)
+    const { scene, point } = initThreeWorld(app, el)
+    pointLight = point
     loadData(scene)
     
     function animate() {
+        graphGroup.children.forEach(el => {
+            el.rotation.y += 0.0015
+            if (el.name !== '太阳') {
+                moveOnCurve(curveMap[el.name], el as MyMesh)
+            }
+        })
         renderer.render(scene, camera)
         requestAnimationFrame(animate)
     }
     animate()
-    // controls = new OrbitControls(camera, renderer.domElement)
-    // controls.autoRotate = true
-    // controls.addEventListener('change', () => {
-    //     renderer.render(scene, camera)
-    // })
+    let controls
+    controls = new OrbitControls(camera, renderer.domElement)
+    controls.maxDistance = 3500;
+    controls.minDistance = 1500;
+    controls.addEventListener('change', () => {
+        renderer.render(scene, camera)
+    })
 })
 </script>
 

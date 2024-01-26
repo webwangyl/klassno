@@ -40,7 +40,9 @@ const componentMap = {
 	VolumeSound: defineAsyncComponent(() => import('../components/case/VolumeSound.vue')),
 	StarNight: defineAsyncComponent(() => import('../components/case/StarNight.vue')),
 	MutiLayer: defineAsyncComponent(() => import('../components/case/MutiLayer.vue')),
-	ColorTriangle: defineAsyncComponent(() => import('../components/case/ColorTriangle.vue'))
+	ColorTriangle: defineAsyncComponent(() => import('../components/case/ColorTriangle.vue')),
+	CircleLayout: defineAsyncComponent(() => import('../components/case/CircleLayout.vue')),
+	AutoFind: defineAsyncComponent(() => import('../components/case/AutoFind.vue'))
 }
 
 if (caseList.length < 30) {

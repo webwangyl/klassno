@@ -20,6 +20,8 @@
             <Case6 v-if="activeIndex === 5"></Case6>
             <Case7 v-if="activeIndex === 6"></Case7>
             <Case8 v-if="activeIndex === 7"></Case8>
+            <Case9 v-if="activeIndex === 8"></Case9>
+            <Case10 v-if="activeIndex === 9"></Case10>
         </div>
     </div>
 </template>
@@ -43,9 +45,13 @@ import Case7Text from '@/components/case/MutiLayer.vue?raw'
 import Case7 from '@/components/case/MutiLayer.vue'
 import Case8Text from '@/components/case/ColorTriangle.vue?raw'
 import Case8 from '@/components/case/ColorTriangle.vue'
+import Case9Text from '@/components/case/CircleLayout.vue?raw'
+import Case9 from '@/components/case/CircleLayout.vue'
+import Case10Text from '@/components/case/AutoFind.vue?raw'
+import Case10 from '@/components/case/AutoFind.vue'
 
 const arr = [
-    Case1Text, Case2Text, Case3Text, Case4Text, Case5Text, Case6Text, Case7Text, Case8Text
+    Case1Text, Case2Text, Case3Text, Case4Text, Case5Text, Case6Text, Case7Text, Case8Text, Case9Text, Case10Text
 ]
 
 let activeIndex = ref<number>(0)

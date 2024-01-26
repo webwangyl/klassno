@@ -46,9 +46,19 @@ export const getTransformPosition = (vector3: THREE.Vector3, rotate: THREE.Euler
     return originalPosition
 }
 
+// 根据一系列三维点创建一个三维曲线
+export const createCurve = (points: THREE.Vector3[]) => {
+    const curve = new THREE.CatmullRomCurve3(points, true, 'catmullrom', 1)
+    const curvePoints = curve.getPoints(50)
+    const geometry = new THREE.BufferGeometry().setFromPoints(curvePoints)
+    const material = new THREE.LineBasicMaterial({ color: 0xffffff })
+    return { line: new THREE.Line(geometry, material), curve: curve }
+}
+
 export default {
     calcAxisAngles,
     calcNodeDistance,
     vector3ToScreen,
     getTransformPosition,
+    createCurve
 }

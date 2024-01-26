@@ -6,6 +6,20 @@
   "description": "klassno",
   "glyphs": [
     {
+      "icon_id": "109728",
+      "name": "delete",
+      "font_class": "delete",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    },
+    {
+      "icon_id": "22891849",
+      "name": "star",
+      "font_class": "star",
+      "unicode": "e65e",
+      "unicode_decimal": 58974
+    },
+    {
       "icon_id": "88609",
       "name": "copy",
       "font_class": "copy",

@@ -9,6 +9,9 @@ export interface INode {
     y?: number,
     z?: number,
     wireframe?: boolean,
+    points?: THREE.Vector3[],
+    velocity?: number,
+    progress?: number,
 }
 
 export interface IRelation {

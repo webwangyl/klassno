@@ -1,10 +1,10 @@
 @font-face {
   font-family: "knofont"; /* Project id 3614689 */
   src: 
-       url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAAQoAAsAAAAACPQAAAPZAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHFQGYACDMgqFDIQtATYCJAMUCwwABCAFhFsHShvFB8iO1E65jOAjeODrzPfnzwReKIW1MLNbOzmVwtG+JdXNp47fO4c3Qgt4AwUoaweoEPLanxRzBVRqc4aU3PT3K9544yvw7AusYnRQVFiBrCXQAkXWRQnf0dkB+A1jlxd5DQKw0JuRKPHHlzc0OU6VlmZR0UsFRMFiXGAUDXNi1AqcwMQzNJ2qIlajgbJEeQCs8n5efKevMIGCJtFXyfYcefTn9wQ2SK/uBfkBpwQB7K4AGiCB7guTiinV6nH0BbbuSCxFln6iIeV3JhQUv8c/O2AIbNB1APStcS2GDSSK/M9DGNDZNgii7Sr4PRYCCf7ZCBQIGBAICGygPh225vS2AHbgCfAfg/Zsw8WZZagrzKYbpSu0s7vqxPGlV08KzXfqmtW+7MoJVO/xy2OWHqbMIynmscKEo5bZ40uP+o7JmmPLjtSg5ZQf8R4uiPDzw8fbirTB98sXuuLVyOsWAQ55XXD4xcunL193ixg1IuyI9xzPX7/qWjh3sujTd3RpaP56b1jBhmXHfOGFzmUbULzrLY6lh2cR61x2S0jfzbkOwnL2W0xxNHDXqNvuK9vc0e5tV9yBx9tb9rb2aIt724s0yeh/e1t3W7sjtldjZnUTddRCFDJW990VLZFhjg02YWEoC9cOLR86xGh+tc0094y853xtRujfvxbBI0RfMTujzbSx4/fCUpxp68mRadbAog8PNr1OtSVOJbtSgpO36ToDcpdVV7x+NW/bfMvq1YubL7HDj7j7Nd+cm3c7YBxzTMsfOGpvF9XWfrTVtZYnWl5n0N1t/5wFS/lOxyd/qcCR4sSwQ9MLr6OFAP229MpoIv2bXCLDAeQe2daTKv5f5W84+Gjbjyrn8N8mqwrA51XzOkGTflulO/lVc2hM/jE45Q3zqgoRcdSiTEuJQNFQwRvXKvD6+TrUB/NpGG5IYwsIjAkKQynAjZKgDUoFnaGGlV7QgJGh0EI3YjRWQv6vBNUMdGQhhAIHB1AKOIeS4A5KBY+hRjgfoQEHP6GFQiGWs9JRFB3kUCU8rp3No+vEatNURlbcwCuYKlZ5ggp73SEvArHcp2fvjPMEFnn7EVNnmP1p0zR7pkjCidxuiGPhSVMkhFtuN00rU6dXL0/Rq2zXTUzogBygKAEeTC0dzGhcBIt2cCURXxLfdwUwVMQo8uIsMPYOkFMQcI0xfehJ72rUCds2ybqA1lOpMewzjRKNmR4cKCQwid2UIMY2gZlU3CkEuJRs09TBkuLQy8jnacre3ho3ubV1gAX95TShCClUoQkDap2k3dgkiZBvTZ2kPPTXKjfqHw9bEQEAAAA=') format('woff2'),
-       url('iconfont.woff?t=1667877799630') format('woff'),
-       url('iconfont.ttf?t=1667877799630') format('truetype'),
-       url('iconfont.svg?t=1667877799630#knofont') format('svg');
+       url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAAVUAAsAAAAACtwAAAUIAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHFQGYACDXgqILIZwATYCJAMcCxAABCAFhFsHWhtMCVFUT1pkX+A4TwS65XUxtJj0KpyKEkqAEQAAAAAAAACj8fDffrT7ZubPX/XmljYv1swbh7QlIJoIWUMiJEIiFLXIIe/WWuZL6DnCHMoiq7L7o+wdZ2c396Be1foq04IOhylhz05JwyBemXN6RH8EXkK7uR2Uyz3I0Wrzc8DE/3PY+Mano7PTtQROce5htbFsPu+F0VpDsEDixDQF8Xx6qRqsmwh02XJm7uDu5R22DmPpYMcCOj6wSuOwzGNYueuVCGzoUNWkO5Yf22hIT+oM4Kn28/EX7ARE0mToqU7fus3g95kiJDUU8jvwoLgOrJzQIGOtYcZ4GG2/LRvxNfO6gv5mcR7o0yGpPxRcKdOWQvMfZycdG/qYjajzfzxFVokKkfcALicqPxSCRfDDlUXihy+Lhh8JLAo/hSwyP5HCoKLa1fswDOI8QLw4wV68SOpEL5DPd+4rlXYRa5U6FS/lKbX9Lp3kzLGUiaVMBelqxqVI54KQRMZigxvGCNlRu/xXMnM4tFksZnYB4MyksUTCofdLHLsXgChy51O7EswqoDGLrK3HTfJ0zOhoMtq7F1Xl97ext1Q39/XyKG6tJR3tKgtrvB1srZ1svexsPMKkTEdNfG3t7nIXaa8GfKqqLZAp06TlLmlloLVCnFA/I11pd1Sy5TFEPhPLqTIbi926MkRq5+vns/fqFWq5NmWP4GCD6zZlV65evHp9oGHqZF25drnL168NsE2S22G6gtFa76J0NoitpPW2ChYBbmetcqasFvUKdj+HR+9Lkl9kinwHY29dbLSnZ3cMtH91t/V/+T0w3A06YHczf73gtiCOry8ET33YvWwd3A3FhJBO0TBFUEJQzW6VkvW1v2mkqehc1f8b3N23cjL0kUMyulVkWxDM4PbvOWCVqOTC/VJwjA12XlWqLp8d3mN+65sg/gbmCXpTOt5xsEtnuyufDtUN0Xynf9BDNScO6/ol/QZHWR/kTj1AtmeS08jMdtLIurlf1kM2TSgPaB7Im/bgYiV7yC56mbshdU9iN6WBL/9sH5E77c1HHykWAGlakLZjgvOE8Wzhju7RZOxKp8hesdrv3wVH41gfQcZ2jw6SntLNVywcMM+4UPJ8/Z0z+PoC6RzDPOV89bzM/2P0CtbdxcXSqUen9G3bNnTaKCvLyZGdLCtW2gjYRSoF1oIKWU9TD1lF191dqrvsAWMPZf5Q2HS1Vih51l1t5PMn2NATOgMPB1JtARxhyw0FOEpa+J7/+eMPOKet/MqrB+Rn9tCM9ewI/x2nHu7NGm6f/IfrDXy+8WMIUTH8I1QhMf94nt/1MgOgXL4HaMsal4kUW0LBT+hs3djq0YQuNooD2D3kvzjlcOJiQmvYQiSYQmSYRhRYIje6bUrrB/bJXVZd7t5tWGNelAcLZiCHPq8QCV4jMrxBFHhLboz5k1bAP3KXizE4WLeFsLs2FAtlmEyxTLlT3Cd1x2rxK+V9ExuHEKt9krEldxi4vid1Tx2Z9JvYUR6KKFSGW7y7n46ahlEbrigVtxDRR56ngp7FTbmFawaJCZJBiSlUSrGOUrCiVrPj+16RXK8RM8E9UP+JGFZ5nxsKuPxoxL28S9KzAdnWSC4k9EJBqpi10F02K2lInCEdHK2QFHZXkSGqHfFYfyqp3O2asp29M6AL/bo2KqazsnNyqTepIaEFK7FZSFlP1zXXZByr44wWkjitF1rqegA=') format('woff2'),
+       url('iconfont.woff?t=1706248159818') format('woff'),
+       url('iconfont.ttf?t=1706248159818') format('truetype'),
+       url('iconfont.svg?t=1706248159818#knofont') format('svg');
 }
 
 .knofont {
@@ -13,6 +13,14 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.knodelete:before {
+  content: "\e60f";
+}
+
+.knostar:before {
+  content: "\e65e";
 }
 
 .knocopy:before {

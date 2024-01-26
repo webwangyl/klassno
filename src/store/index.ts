@@ -85,6 +85,14 @@ export const store = createStore<State>({
                 title: "Color Triangle",
                 key: 'ColorTriangle'
             },
+            {
+                title: "Circle Layout",
+                key: 'CircleLayout'
+            },
+            {
+                title: "Auto Find",
+                key: 'AutoFind',
+            }
         ],
     },
     mutations,
